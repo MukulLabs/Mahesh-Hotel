@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hotel Mahesh | Luxury Stays, Dynamic Tiered Rates &amp; Celebrations · Sasaram</title>
+<!-- Tailwind CSS for styling -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --accent: #e8a32b;
+    --brand-dark: #0f4a47;
+  }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  .glass-card {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+  .gold-gradient {
+    background: linear-gradient(135deg, #f59e0b 0%, #e8a32b 50%, #b45309 100%);
+  }
+  .hero-overlay {
+    background: linear-gradient(180deg, rgba(7,38,36,0.85) 0%, rgba(15,74,71,0.72) 55%, rgba(7,38,36,0.98) 100%);
+  }
+  ::-webkit-scrollbar { width: 7px; height: 7px; }
+  ::-webkit-scrollbar-track { background: #f8fafc; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-500 selection:text-white pb-20 md:pb-0">
+
+<!-- ========================================== -->
+<!-- 1. GUEST CLIENT SITE CONTAINER             -->
+<!-- ========================================== -->
+<div id="site" class="min-h-screen flex flex-col">
+
+  <!-- Top Announcement Bar -->
+  <aside aria-label="Announcement" class="bg-slate-900 text-amber-200 text-xs py-2 px-4 border-b border-slate-800 flex justify-between items-center tracking-wide">
+    <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-amber-400"></i> Fazalganj, Near Gas Agency, Sasaram, Bihar</span>
+        <span class="hidden md:inline text-slate-700">|</span>
+        <span class="hidden md:inline text-emerald-300"><i class="fa-solid fa-tags text-amber-400 mr-1"></i> Tiered Offers: Up to 30% OFF Stays! Hourly from ₹600</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="tel:+918294817088" class="hover:text-white transition flex items-center gap-1"><i class="fa-solid fa-phone text-[10px]"></i> +91 82948 17088</a>
+        <a href="#admin" class="hover:text-amber-300 text-slate-300 transition text-[11px] underline flex items-center gap-1"><i class="fa-solid fa-gear"></i> Admin &amp; Rates Manager</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Navigation Header -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-800 to-slate-950 flex items-center justify-center text-amber-400 shadow-md group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-hotel text-xl"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-serif text-2xl font-bold tracking-tight text-slate-900 leading-none">HOTEL MAHESH</span>
+          <span class="text-[10px] uppercase tracking-widest text-amber-700 font-bold mt-1">Boutique Stays &amp; Grand Banquets</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-600">
+        <a href="#rooms" class="hover:text-emerald-800 transition">Rooms &amp; Suites</a>
+        <a href="#hourly" class="hover:text-emerald-800 transition">Hourly Transit</a>
+        <a href="#events" class="hover:text-emerald-800 transition">Banquets &amp; Weddings</a>
+        <a href="#contact" class="hover:text-emerald-800 transition">Location</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#bookingWidget" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl gold-gradient text-slate-950 font-bold text-sm shadow-md hover:brightness-110 active:scale-95 transition-all">
+          <i class="fa-solid fa-calendar-check"></i> Book Now
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-[600px] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2000&q=80" alt="Hotel Mahesh Ambience" class="w-full h-full object-cover object-center scale-105">
+      <div class="absolute inset-0 hero-overlay"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center text-white">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-amber-300 text-xs sm:text-sm font-semibold mb-6">
+        <i class="fa-solid fa-fire text-amber-400"></i> Smart Tiered Rates: 2 Nights = 20% OFF | 3 Nights = 25% OFF | 4+ Nights = 30% OFF!
+      </div>
+
+      <h1 class="font-serif text-4xl sm:text-6xl font-bold tracking-tight text-white mb-4 drop-shadow-md">
+        Comfortable Stays, Warm Welcome &amp; Smart Rates.
+      </h1>
+      <p class="max-w-2xl mx-auto text-sm sm:text-base text-slate-200 font-light mb-8">
+        Stay overnight or reserve by the hour. Pure comfort in Fazalganj, Sasaram with instant front-desk reservations.
+      </p>
+
+      <!-- Glass Floating Booking Widget -->
+      <div id="bookingWidget" class="max-w-5xl mx-auto glass-card rounded-2xl p-5 sm:p-7 shadow-2xl text-left border border-white/60">
+        
+        <div class="flex items-center gap-2 mb-4 border-b border-slate-200 pb-3">
+          <button type="button" id="tabNightly" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-emerald-800 text-white shadow transition flex items-center gap-2">
+            <i class="fa-solid fa-moon"></i> Overnight Stay (Multi-Night Discount)
+          </button>
+          <button type="button" id="tabHourly" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 hover:bg-slate-100 transition flex items-center gap-2">
+            <i class="fa-solid fa-clock"></i> Hourly Transit / Day Pass
+          </button>
+        </div>
+
+        <form id="bookForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+          
+          <div class="b-night">
+            <label for="cin" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              <i class="fa-regular fa-calendar text-emerald-800 mr-1"></i> Check-in Date
+            </label>
+            <input type="date" id="cin" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-800 text-sm font-medium focus:ring-2 focus:ring-amber-500 focus:outline-none transition">
+          </div>
+
+          <div class="b-night">
+            <label for="cout" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              <i class="fa-regular fa-calendar-check text-emerald-800 mr-1"></i> Check-out Date
+            </label>
+            <input type="date" id="cout" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-800 text-sm font-medium focus:ring-2 focus:ring-amber-500 focus:outline-none transition">
+          </div>
+
+          <div class="b-hour hidden">
+            <label for="hDate" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              <i class="fa-regular fa-calendar text-emerald-800 mr-1"></i> Stay Date
+            </label>
+            <input type="date" id="hDate" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-800 text-sm font-medium focus:ring-2 focus:ring-amber-500 focus:outline-none transition">
+          </div>
+
+          <div class="b-hour hidden">
+            <label for="hDuration" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              <i class="fa-solid fa-stopwatch text-emerald-800 mr-1"></i> Duration / Tier
+            </label>
+            <select id="hDuration" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-800 text-sm font-medium focus:ring-2 focus:ring-amber-500 focus:outline-none transition">
+              <option value="1">1 Hour Short Stay</option>
+              <option value="2">2 Hours Refresh Stay</option>
+              <option value="3">3 Hours Transit Stay</option>
+              <option value="6">Whole Day Pass (Up to 24 hrs)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="guests" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              <i class="fa-solid fa-user-group text-emerald-800 mr-1"></i> Guests
+            </label>
+            <select id="guests" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-800 text-sm font-medium focus:ring-2 focus:ring-amber-500 focus:outline-none transition">
+              <option value="1">1 Guest</option>
+              <option value="2" selected>2 Guests</option>
+              <option value="3">3 Guests</option>
+              <option value="4">4 Guests</option>
+              <option value="5">5+ Guests</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="rtype" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              <i class="fa-solid fa-bed text-emerald-800 mr-1"></i> Room Category
+            </label>
+            <select id="rtype" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-800 text-sm font-medium focus:ring-2 focus:ring-amber-500 focus:outline-none transition">
+            </select>
+          </div>
+
+          <div>
+            <button type="submit" id="btnOpenModal" class="w-full gold-gradient hover:brightness-110 active:scale-95 text-slate-950 font-bold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-sm tracking-wide">
+              <span>Instant Reserve</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+          </div>
+        </form>
+
+        <!-- Live Price Calculation Breakdown Banner -->
+        <div id="liveQuoteBox" class="mt-4 p-3 bg-amber-50/90 rounded-xl border border-amber-200/90 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm">
+              <i class="fa-solid fa-tag"></i>
+            </span>
+            <div>
+              <span id="calcSummary" class="font-bold text-slate-900 block">Loading rates...</span>
+              <span id="calcDiscountTag" class="text-xs text-emerald-700 font-semibold">Standard regular rate</span>
+            </div>
+          </div>
+          <div class="text-right">
+            <span id="calcOldPrice" class="line-through text-slate-400 text-xs mr-1 hidden">₹0</span>
+            <span id="calcFinalPrice" class="text-xl sm:text-2xl font-black text-slate-950">₹0</span>
+            <span class="text-[10px] text-slate-500 block">Taxes included</span>
+          </div>
+        </div>
+
+        <div id="msg" role="status" class="mt-3 text-xs sm:text-sm text-slate-700 font-medium flex items-center flex-wrap gap-2">
+          <i class="fa-solid fa-shield-halved text-emerald-600"></i> No advance deposit required. Front desk accepts Cash, UPI &amp; Cards.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROOMS & SUITES SECTION -->
+  <section id="rooms" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs uppercase tracking-widest font-bold text-amber-700 bg-amber-100 px-3.5 py-1.5 rounded-full">Accommodations</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-slate-900 mt-3 mb-4">Thoughtfully Appointed Rooms &amp; Suites</h2>
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+          Book with full confidence. Extend your stay to 2 nights for <strong>20% OFF</strong>, 3 nights for <strong>25% OFF</strong>, and 4+ nights for a massive <strong>30% discount</strong>!
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="roomGrid">
+        <p class="col-span-full text-center text-slate-400 py-12">Loading available rooms from cloud database...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURLY TRANSIT SECTION -->
+  <section id="hourly" class="py-16 bg-white border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs uppercase tracking-widest font-bold text-emerald-800 bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-200">Flexible Hourly Stays</span>
+        <h2 class="font-serif text-3xl font-bold text-slate-900 mt-3 mb-3">Transit Day Rooms &amp; Hourly Rates</h2>
+        <p class="text-slate-600 text-sm">Need a quiet space between train transfers at Sasaram Junction or a spot to freshen up? Choose short hourly slots.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center hover:shadow-md transition">
+          <div class="w-12 h-12 mx-auto rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-lg mb-3">1h</div>
+          <h4 class="font-bold text-slate-900 text-base mb-1">Quick Refresh</h4>
+          <p class="text-xs text-slate-500 mb-4">Shower, change &amp; luggage safety</p>
+          <div class="text-2xl font-black text-slate-900">₹600</div>
+          <span class="text-[11px] text-slate-400">for first 60 minutes</span>
+        </div>
+
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center hover:shadow-md transition">
+          <div class="w-12 h-12 mx-auto rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-lg mb-3">2h</div>
+          <h4 class="font-bold text-slate-900 text-base mb-1">Transit Relax</h4>
+          <p class="text-xs text-slate-500 mb-4">Rest comfortably between trains</p>
+          <div class="text-2xl font-black text-slate-900">₹1,000</div>
+          <span class="text-[11px] text-emerald-600 font-bold">Save ₹200 vs single hr</span>
+        </div>
+
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center hover:shadow-md transition">
+          <div class="w-12 h-12 mx-auto rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-lg mb-3">3h</div>
+          <h4 class="font-bold text-slate-900 text-base mb-1">Business Day Use</h4>
+          <p class="text-xs text-slate-500 mb-4">Wi-Fi, quiet work desk &amp; tea</p>
+          <div class="text-2xl font-black text-slate-900">₹1,300</div>
+          <span class="text-[11px] text-emerald-600 font-bold">Save ₹500 vs single hr</span>
+        </div>
+
+        <div class="bg-amber-50/80 p-6 rounded-2xl border-2 border-amber-300 text-center relative hover:shadow-lg transition">
+          <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-950 font-bold text-[10px] uppercase px-3 py-0.5 rounded-full shadow">Best Value</span>
+          <div class="w-12 h-12 mx-auto rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-lg mb-3">24h</div>
+          <h4 class="font-bold text-slate-900 text-base mb-1">Whole Day Transit Pass</h4>
+          <p class="text-xs text-slate-600 mb-4">Standard Rooms Capped at</p>
+          <div class="text-2xl font-black text-slate-900">₹1,500</div>
+          <span class="text-[11px] text-amber-800 font-bold">Family Suite full day: ₹3,000</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANQUETS & WEDDINGS SECTION -->
+  <section class="py-20 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-950 text-white relative overflow-hidden" id="events">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-widest font-bold text-amber-400 bg-amber-400/10 px-4 py-1.5 rounded-full border border-amber-400/20">Celebrations &amp; Grand Banquets</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-bold mt-4 mb-4 text-white">Weddings, Receptions &amp; Milestone Events</h2>
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+          Host memorable weddings, Tilak ceremonies, engagements, birthday parties, and corporate meets with up to 800 guests. Full decor, catering, DJ, and stage setup.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-14">
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden border border-white/15 p-6">
+          <h3 class="font-serif text-2xl font-bold text-white mb-2">Grand Wedding &amp; Tilak Banquets</h3>
+          <p class="text-slate-300 text-sm mb-4 leading-relaxed">Air-conditioned banquet halls with floral mandap entryways, stage lighting, and full catering.</p>
+          <div class="flex items-center justify-between border-t border-white/10 pt-4">
+            <div>
+              <span class="text-xs text-slate-400 block">Overnight Event</span>
+              <span id="evFullRateDisplay" class="text-xl font-bold text-amber-400">₹1,000 <span class="text-xs font-normal text-slate-300">/ guest</span></span>
+            </div>
+            <div class="text-right">
+              <span class="text-xs text-slate-400 block">Up to 6 Hours</span>
+              <span id="evSixRateDisplay" class="text-sm font-semibold text-slate-200">₹400 / guest</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden border border-white/15 p-6">
+          <h3 class="font-serif text-2xl font-bold text-white mb-2">Birthdays &amp; Family Gatherings</h3>
+          <p class="text-slate-300 text-sm mb-4 leading-relaxed">Celebrate memorable moments with balloon styling, surround sound audio systems, and buffet catering.</p>
+          <div class="flex items-center justify-between border-t border-white/10 pt-4">
+            <div>
+              <span class="text-xs text-slate-400 block">Sound &amp; DJ</span>
+              <span class="text-xl font-bold text-amber-400">Available</span>
+            </div>
+            <div class="text-right">
+              <span class="text-xs text-slate-400 block">Catering</span>
+              <span class="text-sm font-semibold text-slate-200">Pure Veg / Multi-Cuisine</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Section -->
+  <section id="contact" class="py-20 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div class="lg:col-span-5">
+          <span class="text-xs uppercase tracking-widest font-bold text-amber-700">Find Us</span>
+          <h2 class="font-serif text-3xl font-bold text-slate-900 mt-2 mb-6">Contact &amp; Visit Hotel Mahesh</h2>
+          <p class="text-slate-600 text-sm leading-relaxed mb-8">
+            Centrally situated near the Fazalganj Gas Agency, easily reachable from Grand Trunk Road (NH 19) and Sasaram Railway Junction.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-map-location-dot"></i>
+              </div>
+              <div>
+                <strong class="block text-slate-900 text-sm">Hotel Address</strong>
+                <span class="text-slate-600 text-xs sm:text-sm">Near Gas Agency, Fazalganj, Sasaram, Rohtas, Bihar 821115</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div>
+                <strong class="block text-slate-900 text-sm">Front Desk Helpline</strong>
+                <a href="tel:+918294817088" class="text-emerald-800 font-bold text-sm hover:underline">+91 82948 17088</a>
+                <span class="text-xs text-slate-400 block">Available 24 hours</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-white p-4 rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+          <div class="w-full h-80 rounded-xl overflow-hidden relative border border-slate-200">
+            <iframe 
+              title="Hotel Mahesh Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.195026980753!2d84.0015574!3d24.9541213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398db13137b0d5c3%3A0x7d6a524a87290d23!2sFazalganj%2C%20Sasaram%2C%20Bihar!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+              class="w-full h-full border-0" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-950 text-slate-300 py-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+        <span>&copy; <span id="yr">2026</span> Hotel Mahesh · All rights reserved.</span>
+        <a href="#admin" class="hover:text-amber-400 font-semibold underline text-amber-400 flex items-center gap-1">
+          <i class="fa-solid fa-sliders"></i> Staff &amp; Rates Manager
+        </a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ========================================================= -->
+<!-- 2. EMBEDDED GUEST DETAILS MODAL (NO CHROME POPUP PROMPTS) -->
+<!-- ========================================================= -->
+<dialog id="guestModal" class="backdrop:bg-slate-950/70 p-0 rounded-2xl shadow-2xl border border-slate-200 w-full max-w-lg overflow-hidden m-auto">
+  <div class="p-6 bg-white">
+    <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-base">
+          <i class="fa-solid fa-address-card"></i>
+        </div>
+        <div>
+          <h3 class="font-serif text-xl font-bold text-slate-900">Guest Identification Details</h3>
+          <p class="text-xs text-slate-500">Government compliance &amp; direct reservation verification</p>
+        </div>
+      </div>
+      <button id="modalCloseBtn" type="button" class="text-slate-400 hover:text-slate-600 text-2xl font-bold leading-none">&times;</button>
+    </div>
+
+    <!-- Booking Summary Badge Inside Modal -->
+    <div class="my-4 p-3 bg-amber-50 rounded-xl border border-amber-200 flex items-center justify-between text-xs font-semibold">
+      <div>
+        <span id="mSummaryRoom" class="text-slate-900 block font-bold">Room Category</span>
+        <span id="mSummaryDates" class="text-slate-500">Dates</span>
+      </div>
+      <div class="text-right">
+        <span id="mSummaryTotal" class="text-base font-black text-slate-900">₹0</span>
+        <span class="text-[10px] text-emerald-700 block font-bold">Instant Reservation</span>
+      </div>
+    </div>
+
+    <form id="guestDetailsForm" class="space-y-4">
+      <div>
+        <label for="custName" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+          Full Name <span class="text-rose-500">*</span>
+        </label>
+        <div class="relative">
+          <i class="fa-solid fa-user absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+          <input type="text" id="custName" required placeholder="e.g. Raj Abhishek Verma" class="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-sm font-medium focus:ring-2 focus:ring-emerald-800 focus:outline-none">
+        </div>
+      </div>
+
+      <div>
+        <label for="custPhone" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+          10-Digit Mobile Number <span class="text-rose-500">*</span>
+        </label>
+        <div class="relative">
+          <i class="fa-solid fa-phone absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+          <input type="tel" id="custPhone" maxlength="10" required placeholder="e.g. 9876543210" class="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-sm font-medium focus:ring-2 focus:ring-emerald-800 focus:outline-none">
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label for="custDocType" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+            Document Type <span class="text-rose-500">*</span>
+          </label>
+          <select id="custDocType" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-medium focus:ring-2 focus:ring-emerald-800 focus:outline-none">
+            <option value="Aadhaar Card" selected>Aadhaar Card</option>
+            <option value="Voter ID">Voter ID</option>
+            <option value="Driving Licence">Driving Licence</option>
+            <option value="Passport">Passport</option>
+            <option value="Other Govt ID">Other Govt ID</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="custDocNum" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+            Document / ID Number <span class="text-rose-500">*</span>
+          </label>
+          <input type="text" id="custDocNum" required placeholder="e.g. 4821 XXXX XXXX" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-medium focus:ring-2 focus:ring-emerald-800 focus:outline-none">
+        </div>
+      </div>
+
+      <p id="modalErr" class="text-xs text-rose-600 font-semibold min-h-[16px]"></p>
+
+      <div class="flex items-center gap-3 pt-2">
+        <button id="btnModalCancel" type="button" class="flex-1 py-2.5 px-4 rounded-xl border border-slate-300 text-slate-700 font-semibold text-xs hover:bg-slate-50 transition">
+          Back
+        </button>
+        <button type="submit" id="btnConfirmBooking" class="flex-[2] gold-gradient hover:brightness-110 active:scale-95 text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs transition shadow-md flex items-center justify-center gap-1.5">
+          <span>Confirm &amp; Save Stay</span>
+          <i class="fa-solid fa-check"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<!-- ========================================== -->
+<!-- 3. FULL ADMIN PORTAL & RATES CONFIGURATOR  -->
+<!-- ========================================== -->
+<div id="adminPage" hidden class="min-h-screen bg-slate-100 text-slate-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 mb-8">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-slate-900 text-amber-400 flex items-center justify-center font-bold">
+          <i class="fa-solid fa-shield-halved text-lg"></i>
+        </div>
+        <div>
+          <h1 class="font-serif text-2xl font-bold text-slate-900">Hotel Mahesh · Management Portal</h1>
+          <span class="text-xs text-slate-500">Live Rates Engine, Room Inventory &amp; Cloud Database</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#top" class="px-4 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-arrow-left"></i> Guest Website
+        </a>
+        <button id="adminOut" type="button" class="px-4 py-2 bg-rose-50 text-rose-700 border border-rose-200 rounded-xl text-xs font-bold hover:bg-rose-100 transition hidden">
+          Log Out
+        </button>
+      </div>
+    </header>
+
+    <!-- Admin Login -->
+    <div id="adminLogin" class="max-w-md mx-auto my-12 bg-white p-8 rounded-2xl shadow-xl border border-slate-200">
+      <div class="text-center mb-6">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-800 rounded-2xl flex items-center justify-center mx-auto text-2xl mb-3">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <h2 class="font-serif text-2xl font-bold text-slate-900">Staff Portal Authentication</h2>
+        <p class="text-xs text-slate-500 mt-1">Authorized reception &amp; administrative personnel</p>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label for="au" class="block text-xs font-bold uppercase text-slate-700 mb-1">Username</label>
+          <input id="au" value="admin" autocomplete="username" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-medium focus:ring-2 focus:ring-emerald-800 focus:outline-none">
+        </div>
+        <div>
+          <label for="ap" class="block text-xs font-bold uppercase text-slate-700 mb-1">Password</label>
+          <input id="ap" type="password" value="mahesh@123" autocomplete="current-password" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-medium focus:ring-2 focus:ring-emerald-800 focus:outline-none">
+        </div>
+        <p id="adminErr" class="text-xs text-rose-600 font-semibold min-h-[16px]"></p>
+        <button id="adminGo" type="button" class="w-full gold-gradient hover:brightness-110 active:scale-95 text-slate-950 font-bold py-3 px-4 rounded-xl shadow-md transition text-sm">
+          Access Portal
+        </button>
+      </div>
+    </div>
+
+    <!-- Admin Dashboard Tabs -->
+    <div id="adminDash" hidden class="space-y-8">
+      
+      <!-- Top Tabs -->
+      <div class="flex flex-wrap gap-2 border-b border-slate-200 pb-3">
+        <button type="button" id="admTabRooms" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-800 text-white shadow transition flex items-center gap-2">
+          <i class="fa-solid fa-sliders"></i> Room &amp; Rates Configuration
+        </button>
+        <button type="button" id="admTabBookings" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition flex items-center gap-2">
+          <i class="fa-solid fa-list-check"></i> Stay Reservations
+        </button>
+      </div>
+
+      <!-- TAB 1: ROOM & RATES CONFIGURATION PANEL -->
+      <div id="paneRooms" class="space-y-8">
+        
+        <!-- Multi-Night & Event Global Discount Rules Configurator -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <span class="text-xs uppercase font-bold text-amber-700 tracking-wider">Dynamic Pricing Rules</span>
+              <h3 class="font-serif text-xl font-bold text-slate-900 mt-1">Tiered Discount &amp; Banquet Rate Engine</h3>
+              <p class="text-xs text-slate-500">Configure global percentage discounts and wedding guest pricing</p>
+            </div>
+            <button id="btnResetConfig" type="button" class="px-3.5 py-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition">
+              <i class="fa-solid fa-rotate-left mr-1"></i> Reset to Factory Defaults
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <label for="cfgDisc2" class="block text-xs font-bold uppercase text-slate-700 mb-1">2 Nights Discount (%)</label>
+              <input type="number" id="cfgDisc2" min="0" max="100" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-bold text-emerald-900">
+              <span class="text-[10px] text-slate-500 mt-1 block">Default: 20% discount</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <label for="cfgDisc3" class="block text-xs font-bold uppercase text-slate-700 mb-1">3 Nights Discount (%)</label>
+              <input type="number" id="cfgDisc3" min="0" max="100" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-bold text-emerald-900">
+              <span class="text-[10px] text-slate-500 mt-1 block">Default: 25% discount</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <label for="cfgDisc4" class="block text-xs font-bold uppercase text-slate-700 mb-1">4+ Nights Cap (%)</label>
+              <input type="number" id="cfgDisc4" min="0" max="100" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-bold text-emerald-900">
+              <span class="text-[10px] text-slate-500 mt-1 block">Default: 30% discount</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <label for="cfgEvFull" class="block text-xs font-bold uppercase text-slate-700 mb-1">Event Overnight / Full (₹/guest)</label>
+              <input type="number" id="cfgEvFull" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-bold text-emerald-900">
+              <span class="text-[10px] text-slate-500 mt-1 block">Default: ₹1,000 / guest</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <label for="cfgEvSix" class="block text-xs font-bold uppercase text-slate-700 mb-1">Event 6-Hour Rate (₹/guest)</label>
+              <input type="number" id="cfgEvSix" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-bold text-emerald-900">
+              <span class="text-[10px] text-slate-500 mt-1 block">Default: ₹400 / guest</span>
+            </div>
+          </div>
+
+          <div class="mt-4 flex items-center justify-between">
+            <span id="cfgSaveNotice" class="text-xs text-emerald-700 font-semibold"></span>
+            <button id="btnSaveConfig" type="button" class="px-5 py-2.5 gold-gradient text-slate-950 font-bold rounded-xl text-xs hover:brightness-110 active:scale-95 transition shadow">
+              <i class="fa-solid fa-floppy-disk mr-1"></i> Save Global Pricing Rules
+            </button>
+          </div>
+        </div>
+
+        <!-- Room Inventory & Rates Editor -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <span class="text-xs uppercase font-bold text-amber-700 tracking-wider">Room Inventory</span>
+              <h3 class="font-serif text-xl font-bold text-slate-900 mt-1">Manage Room Types, Hourly Tiers &amp; Imagery</h3>
+              <p class="text-xs text-slate-500">Edit nightly base prices, hourly slabs (1h, 2h, 3h, day cap), photo URLs, and features</p>
+            </div>
+            <button id="btnOpenNewRoom" type="button" class="px-4 py-2 bg-emerald-800 text-white rounded-xl text-xs font-bold hover:bg-emerald-900 transition flex items-center gap-1.5">
+              <i class="fa-solid fa-plus"></i> Add New Room Type
+            </button>
+          </div>
+
+          <div id="adminRoomList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          </div>
+        </div>
+
+        <!-- Room Add/Edit Form Drawer -->
+        <div id="roomEditDrawer" class="bg-slate-50 rounded-2xl p-6 border-2 border-emerald-200 hidden">
+          <div class="flex items-center justify-between mb-4">
+            <h4 id="roomFormTitle" class="font-serif text-lg font-bold text-slate-900">Add New Room Type</h4>
+            <button id="btnCloseRoomForm" type="button" class="text-slate-400 hover:text-slate-600 font-bold text-lg">&times;</button>
+          </div>
+
+          <form id="roomForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <input type="hidden" id="rfId">
+            
+            <div class="sm:col-span-2">
+              <label for="rfName" class="block text-xs font-bold uppercase text-slate-700 mb-1">Room Category Name</label>
+              <input id="rfName" required placeholder="e.g. Executive AC Deluxe Room" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
+            </div>
+
+            <div>
+              <label for="rfBasePrice" class="block text-xs font-bold uppercase text-slate-700 mb-1">Base Night Price (₹)</label>
+              <input id="rfBasePrice" type="number" required placeholder="2500" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm font-bold text-emerald-900">
+            </div>
+
+            <div>
+              <label for="rfCapacity" class="block text-xs font-bold uppercase text-slate-700 mb-1">Capacity / Bed Info</label>
+              <input id="rfCapacity" placeholder="e.g. Sleeps 2 to 3 Guests" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
+            </div>
+
+            <div>
+              <label for="rfH1" class="block text-xs font-bold uppercase text-slate-700 mb-1">1-Hour Transit (₹)</label>
+              <input id="rfH1" type="number" required placeholder="600" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
+            </div>
+
+            <div>
+              <label for="rfH2" class="block text-xs font-bold uppercase text-slate-700 mb-1">2-Hours Transit (₹)</label>
+              <input id="rfH2" type="number" required placeholder="1000" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
+            </div>
+
+            <div>
+              <label for="rfH3" class="block text-xs font-bold uppercase text-slate-700 mb-1">3-Hours Transit (₹)</label>
+              <input id="rfH3" type="number" required placeholder="1300" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
+            </div>
+
+            <div>
+              <label for="rfHDay" class="block text-xs font-bold uppercase text-slate-700 mb-1">Whole Day Cap (₹)</label>
+              <input id="rfHDay" type="number" required placeholder="1500" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm font-bold text-amber-700">
+            </div>
+
+            <div class="sm:col-span-2 lg:col-span-4">
+              <label for="rfImg" class="block text-xs font-bold uppercase text-slate-700 mb-1">Photo Image URL</label>
+              <input id="rfImg" placeholder="https://..." class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
+            </div>
+
+            <div class="sm:col-span-2 lg:col-span-4">
+              <label for="rfDesc" class="block text-xs font-bold uppercase text-slate-700 mb-1">Description</label>
+              <textarea id="rfDesc" rows="2" placeholder="Brief room features..." class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm"></textarea>
+            </div>
+
+            <div class="sm:col-span-2 lg:col-span-4 flex items-center justify-end gap-3 pt-2">
+              <button id="btnCancelRoomForm" type="button" class="px-4 py-2 border border-slate-300 text-slate-700 rounded-xl text-xs font-semibold hover:bg-slate-100 transition">
+                Cancel
+              </button>
+              <button type="submit" class="px-5 py-2.5 gold-gradient text-slate-950 font-bold rounded-xl text-xs hover:brightness-110 active:scale-95 transition shadow">
+                <i class="fa-solid fa-check mr-1"></i> Save Room to Supabase
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- TAB 2: STAY RESERVATIONS & COUNTER CHECK-IN -->
+      <div id="paneBookings" class="space-y-8 hidden">
+        
+        <!-- Counter Quick Reservation Form -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-cash-register"></i>
+            </div>
+            <div>
+              <h3 class="font-serif text-xl font-bold text-slate-900">Front Desk Counter Booking</h3>
+              <p class="text-xs text-slate-500">Fast check-in for walk-ins or phone reservations with dynamic discount calculation</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+            <div>
+              <label for="nName" class="block text-xs font-bold uppercase text-slate-700 mb-1">Guest Full Name</label>
+              <input id="nName" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm">
+            </div>
+            <div>
+              <label for="nPh" class="block text-xs font-bold uppercase text-slate-700 mb-1">Mobile (10 digits)</label>
+              <input id="nPh" type="tel" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm">
+            </div>
+            <div>
+              <label for="nRoom" class="block text-xs font-bold uppercase text-slate-700 mb-1">Room Category</label>
+              <select id="nRoom" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm"></select>
+            </div>
+            <div>
+              <label for="nId" class="block text-xs font-bold uppercase text-slate-700 mb-1">Guest ID Proof (Aadhaar / Voter)</label>
+              <input id="nId" placeholder="Govt ID reference" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm">
+            </div>
+
+            <div>
+              <label for="nType" class="block text-xs font-bold uppercase text-slate-700 mb-1">Stay Basis</label>
+              <select id="nType" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm font-semibold text-emerald-800">
+                <option value="night">Per Night (Multi-night Offer)</option>
+                <option value="hour">Hourly Transit Basis</option>
+              </select>
+            </div>
+
+            <!-- Night Stay Dates -->
+            <div class="adm-gn">
+              <label for="nIn" class="block text-xs font-bold uppercase text-slate-700 mb-1">Check-in Date</label>
+              <input type="date" id="nIn" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm">
+            </div>
+            <div class="adm-gn">
+              <label for="nOut" class="block text-xs font-bold uppercase text-slate-700 mb-1">Check-out Date</label>
+              <input type="date" id="nOut" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm">
+            </div>
+
+            <!-- Hourly Specific Inputs -->
+            <div class="adm-gh hidden">
+              <label for="nDate" class="block text-xs font-bold uppercase text-slate-700 mb-1">Stay Date</label>
+              <input type="date" id="nDate" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm">
+            </div>
+            <div class="adm-gh hidden">
+              <label for="nHrs" class="block text-xs font-bold uppercase text-slate-700 mb-1">Stay Hours</label>
+              <select id="nHrs" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm">
+                <option value="1">1 Hour</option>
+                <option value="2">2 Hours</option>
+                <option value="3">3 Hours</option>
+                <option value="6">Whole Day Pass (Cap)</option>
+              </select>
+            </div>
+
+            <div>
+              <button id="nGo" type="button" class="w-full gold-gradient hover:brightness-110 active:scale-95 text-slate-950 font-bold py-2.5 px-4 rounded-xl text-sm transition shadow">
+                Save &amp; Check In
+              </button>
+            </div>
+          </div>
+          <p id="nErr" class="text-xs text-rose-600 font-semibold mt-2 min-h-[16px]"></p>
+        </div>
+
+        <!-- Live Bookings List Table -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+          <h3 class="font-serif text-xl font-bold text-slate-900 mb-4">Live Cloud Reservations (Supabase)</h3>
+          <div class="overflow-x-auto" id="adminList">
+            <p class="text-slate-400 py-6 text-center text-xs">Loading live bookings...</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!-- 4. CONTROLLER SCRIPT (DIRECT SUPABASE INTEGRATION)        -->
+<!-- ========================================================= -->
+<script>
+(function() {
+  const API_BASE = "https://mahesh-hotel.onrender.com/api";
+  const PHONE = "918294817088";
+  const ADMIN_USER = "admin";
+  const ADMIN_PASS = "mahesh@123";
+
+  let cachedRooms = [];
+  let cachedConfig = { d2: 20, d3: 25, d4plus: 30, event_full: 1000, event_six: 400 };
+  let stayMode = "night"; // "night" | "hour"
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const money = (n) => "₹" + Number(n || 0).toLocaleString("en-IN");
+  const nightsBetween = (a, b) => Math.max(1, Math.round((new Date(b) - new Date(a)) / 864e5));
+
+  // ---------------- API SERVICES ----------------
+  async function loadConfig() {
+    try {
+      const res = await fetch(`${API_BASE}/config`);
+      if (res.ok) cachedConfig = await res.json();
+    } catch (e) {
+      console.warn("Could not load config from cloud, using defaults:", e);
+    }
+    // Update config inputs in Admin
+    if ($("cfgDisc2")) $("cfgDisc2").value = cachedConfig.d2;
+    if ($("cfgDisc3")) $("cfgDisc3").value = cachedConfig.d3;
+    if ($("cfgDisc4")) $("cfgDisc4").value = cachedConfig.d4plus;
+    if ($("cfgEvFull")) $("cfgEvFull").value = cachedConfig.event_full || 1000;
+    if ($("cfgEvSix")) $("cfgEvSix").value = cachedConfig.event_six || 400;
+
+    if ($("evFullRateDisplay")) $("evFullRateDisplay").innerHTML = `₹${cachedConfig.event_full || 1000} <span class="text-xs font-normal text-slate-300">/ guest</span>`;
+    if ($("evSixRateDisplay")) $("evSixRateDisplay").textContent = `₹${cachedConfig.event_six || 400} / guest`;
+  }
+
+  async function loadRooms() {
+    try {
+      const res = await fetch(`${API_BASE}/rooms`);
+      if (res.ok) {
+        cachedRooms = await res.json();
+      }
+    } catch (e) {
+      console.error("Could not load rooms from cloud:", e);
+    }
+    renderRoomCards();
+    renderAdminRooms();
+    refreshLiveQuote();
+  }
+
+  async function loadBookings() {
+    try {
+      const res = await fetch(`${API_BASE}/bookings`);
+      if (res.ok) return await res.json();
+    } catch (e) {
+      console.error("Could not load bookings:", e);
+    }
+    return [];
+  }
+
+  // ---------------- RENDERING ROOMS ----------------
+  function renderRoomCards() {
+    const rg = $("roomGrid");
+    const rs = $("rtype");
+    const nR = $("nRoom");
+
+    if (rs) rs.innerHTML = "";
+    if (nR) nR.innerHTML = "";
+    if (rg) rg.innerHTML = "";
+
+    if (!cachedRooms.length) {
+      if (rg) rg.innerHTML = '<p class="col-span-full text-center text-slate-400 py-12">No rooms loaded.</p>';
+      return;
+    }
+
+    cachedRooms.forEach((r) => {
+      if (rs) rs.insertAdjacentHTML("beforeend", `<option value="${esc(r.id)}">${esc(r.name)} · ₹${r.price}/night</option>`);
+      if (nR) nR.insertAdjacentHTML("beforeend", `<option value="${esc(r.id)}">${esc(r.name)}</option>`);
+
+      if (rg) {
+        rg.insertAdjacentHTML("beforeend", `
+          <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-200 transition-all duration-300 flex flex-col group">
+            <div class="relative h-64 overflow-hidden bg-slate-900">
+              <img src="${esc(r.image_url)}" alt="${esc(r.name)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/800x500/0f4a47/ffffff?text=${encodeURIComponent(r.name)}'">
+              <div class="absolute top-3 left-3 bg-emerald-950/90 backdrop-blur-md text-amber-300 text-xs font-bold px-3 py-1 rounded-lg border border-amber-400/30">
+                ${esc(r.sleeps)}
+              </div>
+              <div class="absolute bottom-3 right-3 bg-slate-950/80 backdrop-blur-md text-white text-[11px] px-2.5 py-1 rounded-md">
+                Hourly: 1h: ₹${r.h1} | 2h: ₹${r.h2} | Day: ₹${r.hday}
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-2xl font-bold text-slate-900 group-hover:text-emerald-800 transition">${esc(r.name)}</h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">${esc(r.description)}</p>
+              </div>
+              <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
+                <div>
+                  <span class="text-xs text-slate-400 block font-medium">Nightly Standard Rate</span>
+                  <span class="text-2xl font-black text-slate-900">${money(r.price)} <span class="text-xs font-normal text-slate-500">/ night</span></span>
+                </div>
+                <button type="button" onclick="window.pickRoom('${r.id}')" class="px-4 py-2.5 rounded-xl gold-gradient hover:brightness-110 active:scale-95 text-slate-950 font-bold text-xs transition shadow-md">
+                  Select &amp; Quote
+                </button>
+              </div>
+            </div>
+          </article>
+        `);
+      }
+    });
+  }
+
+  window.pickRoom = function(id) {
+    if ($("rtype")) $("rtype").value = id;
+    $("bookingWidget").scrollIntoView({ behavior: "smooth", block: "center" });
+    refreshLiveQuote();
+  };
+
+  // ---------------- LIVE PRICE CALCULATOR ----------------
+  function refreshLiveQuote() {
+    if (!cachedRooms.length) return;
+    const roomId = $("rtype") ? $("rtype").value : cachedRooms[0].id;
+    const room = cachedRooms.find(r => r.id === roomId) || cachedRooms[0];
+    if (!room) return;
+
+    if (stayMode === "night") {
+      const cin = $("cin").value;
+      const cout = $("cout").value;
+      const n = (cout && cin && cout > cin) ? nightsBetween(cin, cout) : 1;
+      const baseTotal = n * room.price;
+      
+      let discountPct = 0;
+      if (n === 2) discountPct = cachedConfig.d2 || 20;
+      else if (n === 3) discountPct = cachedConfig.d3 || 25;
+      else if (n >= 4) discountPct = cachedConfig.d4plus || 30;
+
+      const finalPayable = Math.round(baseTotal * (1 - (discountPct / 100)));
+
+      $("calcSummary").textContent = `${n} Night(s) Stay (${room.name})`;
+      if (discountPct > 0) {
+        $("calcDiscountTag").innerHTML = `<span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold mr-1">-${discountPct}% OFF</span> Multi-night discount applied!`;
+        $("calcOldPrice").textContent = money(baseTotal);
+        $("calcOldPrice").classList.remove("hidden");
+      } else {
+        $("calcDiscountTag").textContent = "Standard rate (Stay 2+ nights to unlock 20% to 30% OFF!)";
+        $("calcOldPrice").classList.add("hidden");
+      }
+      $("calcFinalPrice").textContent = money(finalPayable);
+    } else {
+      const hours = Number($("hDuration").value) || 1;
+      let total = room.h1;
+      if (hours === 2) total = room.h2;
+      else if (hours === 3) total = room.h3;
+      else if (hours >= 4) total = room.hday;
+
+      $("calcSummary").textContent = `${hours} Hour(s) Transit Stay (${room.name})`;
+      $("calcDiscountTag").textContent = hours >= 4 ? "Whole Day Pass Cap Applied" : "Hourly Transit Rate";
+      $("calcOldPrice").classList.add("hidden");
+      $("calcFinalPrice").textContent = money(total);
+    }
+  }
+
+  // ---------------- EMBEDDED MODAL & BOOKING SUBMISSION ----------------
+  const guestModal = $("guestModal");
+
+  $("bookForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const cin = $("cin").value;
+    const cout = $("cout").value;
+    const hDate = $("hDate").value;
+
+    if (stayMode === "night") {
+      if (!cin || !cout || cout <= cin) {
+        alert("Please select valid check-in and check-out dates.");
+        return;
+      }
+    } else {
+      if (!hDate) {
+        alert("Please select stay date for hourly booking.");
+        return;
+      }
+    }
+
+    const roomSelect = $("rtype");
+    const roomName = roomSelect ? roomSelect.options[roomSelect.selectedIndex].text : "Room";
+    const finalPrice = $("calcFinalPrice").textContent;
+
+    $("mSummaryRoom").textContent = roomName;
+    $("mSummaryDates").textContent = stayMode === "night" ? `${cin} to ${cout}` : `${hDate} (${$("hDuration").value} hrs)`;
+    $("mSummaryTotal").textContent = finalPrice;
+    $("modalErr").textContent = "";
+
+    if (guestModal.showModal) guestModal.showModal();
+    else guestModal.setAttribute("open", "");
+  });
+
+  $("modalCloseBtn").onclick = () => guestModal.close();
+  $("btnModalCancel").onclick = () => guestModal.close();
+
+  $("guestDetailsForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const name = $("custName").value.trim();
+    const phone = $("custPhone").value.replace(/\D/g, "").slice(-10);
+    const docType = $("custDocType").value;
+    const docNum = $("custDocNum").value.trim();
+    const errBox = $("modalErr");
+    const confirmBtn = $("btnConfirmBooking");
+    const msg = $("msg");
+
+    if (name.length < 2) {
+      errBox.textContent = "Please enter guest full name.";
+      return;
+    }
+    if (phone.length !== 10) {
+      errBox.textContent = "Please enter a valid 10-digit mobile number.";
+      return;
+    }
+    if (docNum.length < 3) {
+      errBox.textContent = "Please enter a valid document / ID number.";
+      return;
+    }
+
+    const roomId = $("rtype").value;
+    const guests = $("guests").value;
+    const cin = stayMode === "night" ? $("cin").value : $("hDate").value;
+    const cout = stayMode === "night" ? $("cout").value : $("hDate").value;
+    const hours = stayMode === "hour" ? Number($("hDuration").value) : 0;
+    const fullDocDetails = `${docType}: ${docNum}`;
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("phone", phone);
+    formData.append("room_id", roomId);
+    formData.append("booking_type", stayMode);
+    formData.append("start_date", cin);
+    formData.append("end_date", cout);
+    formData.append("hours", hours.toString());
+    formData.append("guests", guests.toString());
+    formData.append("id_proof", fullDocDetails);
+
+    try {
+      confirmBtn.disabled = true;
+      confirmBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving to Cloud...';
+      errBox.textContent = "";
+
+      const res = await fetch(`${API_BASE}/bookings`, {
+        method: "POST",
+        body: formData
+      });
+
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(`Server returned ${res.status}: ${errText}`);
+      }
+
+      const data = await res.json();
+      guestModal.close();
+
+      const discInfo = data.discount_applied > 0 ? ` (${data.discount_applied}% multi-night discount applied)` : "";
+      msg.innerHTML = `
+        <span class="text-emerald-700 font-bold"><i class="fa-solid fa-circle-check mr-1"></i> Booking Confirmed! ID: #${data.booking_id} · Total: ${money(data.total)}${discInfo}.</span>
+      `;
+
+      const roomText = $("rtype").options[$("rtype").selectedIndex].text;
+      const stayText = stayMode === "night" ? `${cin} to ${cout}` : `${cin} (${hours} hrs)`;
+      const waText = `Hello Hotel Mahesh, I booked #${data.booking_id}: ${roomText} for ${stayText}. Total: ${money(data.total)}. Guest: ${name}, Mobile: ${phone}, ID: ${fullDocDetails}. Please confirm!`;
+      
+      const a = document.createElement("a");
+      a.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(waText)}`;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.className = "inline-flex items-center gap-1.5 ml-2 px-3 py-1 bg-emerald-600 text-white rounded-lg text-xs font-bold hover:bg-emerald-700 shadow-sm";
+      a.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Confirm on WhatsApp';
+      msg.appendChild(a);
+
+      alert(`Reservation successful! Booking ID #${data.booking_id} has been recorded in Supabase.`);
+
+      $("custName").value = "";
+      $("custPhone").value = "";
+      $("custDocNum").value = "";
+
+    } catch (err) {
+      console.error(err);
+      errBox.textContent = "Error saving booking: " + err.message;
+    } finally {
+      confirmBtn.disabled = false;
+      confirmBtn.innerHTML = '<span>Confirm &amp; Save Stay</span> <i class="fa-solid fa-check"></i>';
+    }
+  });
+
+  // ---------------- ADMIN PANEL CONTROLS ----------------
+  function adminOn() {
+    return sessionStorage.getItem("hm_admin") === "1";
+  }
+
+  function switchAdminPane(tab) {
+    $("admTabRooms").className = tab === "rooms" ? "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-800 text-white shadow transition flex items-center gap-2" : "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition flex items-center gap-2";
+    $("admTabBookings").className = tab === "bookings" ? "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-800 text-white shadow transition flex items-center gap-2" : "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition flex items-center gap-2";
+
+    $("paneRooms").classList.toggle("hidden", tab !== "rooms");
+    $("paneBookings").classList.toggle("hidden", tab !== "bookings");
+  }
+
+  $("admTabRooms").onclick = () => switchAdminPane("rooms");
+  $("admTabBookings").onclick = () => switchAdminPane("bookings");
+
+  async function renderAdmin() {
+    const on = adminOn();
+    $("adminLogin").hidden = on;
+    $("adminDash").hidden = !on;
+    $("adminOut").hidden = !on;
+    if (!on) return;
+
+    loadConfig();
+    renderAdminRooms();
+
+    const listContainer = $("adminList");
+    listContainer.innerHTML = "<p class='py-4 text-slate-500 text-xs'>Querying live database from Supabase...</p>";
+
+    const bookings = await loadBookings();
+    if (!bookings.length) {
+      listContainer.innerHTML = '<p class="text-slate-400 py-6 text-center text-xs">No reservations found in database.</p>';
+      return;
+    }
+
+    let h = `
+      <table class="w-full text-left text-xs border-collapse min-w-[750px]">
+        <thead>
+          <tr class="border-b border-slate-200 uppercase font-bold text-slate-500">
+            <th class="py-2.5 px-3">ID</th>
+            <th class="py-2.5 px-3">Guest Details</th>
+            <th class="py-2.5 px-3">Room</th>
+            <th class="py-2.5 px-3">Stay Dates / Hours</th>
+            <th class="py-2.5 px-3">ID Document</th>
+            <th class="py-2.5 px-3">Billing</th>
+            <th class="py-2.5 px-3">Status</th>
+            <th class="py-2.5 px-3 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+    `;
+
+    bookings.forEach((b) => {
+      const dates = b.booking_type === "hour" 
+        ? `${esc(b.start_date)} (${b.hours} hrs)` 
+        : `${esc(b.start_date)} to ${esc(b.end_date)}`;
+
+      h += `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="py-3 px-3 font-mono font-bold text-slate-800">${esc(b.id)}</td>
+          <td class="py-3 px-3"><strong>${esc(b.guest_name)}</strong><br><small class="text-slate-500">${esc(b.phone)}</small></td>
+          <td class="py-3 px-3 font-medium">${esc(b.room_name)}</td>
+          <td class="py-3 px-3">${dates}</td>
+          <td class="py-3 px-3 text-slate-600 font-mono text-[11px]">${esc(b.document_url || "Not Provided")}</td>
+          <td class="py-3 px-3 font-bold text-slate-900">${money(b.total)}${b.discount_pct > 0 ? `<div class="text-[10px] text-emerald-600 font-semibold">-${b.discount_pct}% off</div>` : ""}</td>
+          <td class="py-3 px-3"><span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-bold ${b.status === 'Confirmed' ? 'bg-emerald-100 text-emerald-800' : b.status === 'Cancelled' ? 'bg-rose-100 text-rose-800' : 'bg-amber-100 text-amber-800'}">${esc(b.status)}</span></td>
+          <td class="py-3 px-3 text-right space-x-1">
+            ${b.status === 'Pending' ? `<button class="px-2 py-1 bg-emerald-600 text-white rounded text-[10px] font-bold" onclick="window.changeStatus('${esc(b.id)}', 'Confirmed')">Approve</button>` : ""}
+            ${b.status === 'Confirmed' ? `<button class="px-2 py-1 bg-blue-600 text-white rounded text-[10px] font-bold" onclick="window.changeStatus('${esc(b.id)}', 'Checked In')">Check In</button>` : ""}
+            ${b.status !== 'Cancelled' ? `<button class="px-2 py-1 bg-rose-50 text-rose-700 rounded text-[10px] font-bold" onclick="window.changeStatus('${esc(b.id)}', 'Cancelled')">Cancel</button>` : ""}
+          </td>
+        </tr>
+      `;
+    });
+
+    h += "</tbody></table>";
+    listContainer.innerHTML = h;
+  }
+
+  window.changeStatus = async function(id, st) {
+    try {
+      await fetch(`${API_BASE}/bookings/${id}/status?new_status=${encodeURIComponent(st)}`, { method: "PATCH" });
+      renderAdmin();
+    } catch (e) {
+      alert("Failed to update status on server.");
+    }
+  };
+
+  // Save Pricing Config to Cloud
+  $("btnSaveConfig").onclick = async function() {
+    const payload = {
+      d2: Number($("cfgDisc2").value) || 20,
+      d3: Number($("cfgDisc3").value) || 25,
+      d4plus: Number($("cfgDisc4").value) || 30,
+      event_full: Number($("cfgEvFull").value) || 1000,
+      event_six: Number($("cfgEvSix").value) || 400
+    };
+
+    try {
+      const res = await fetch(`${API_BASE}/config`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) {
+        cachedConfig = payload;
+        $("cfgSaveNotice").textContent = "Pricing rules successfully updated in Supabase cloud!";
+        setTimeout(() => $("cfgSaveNotice").textContent = "", 3000);
+        refreshLiveQuote();
+      }
+    } catch (e) {
+      alert("Failed to update pricing rules on server.");
+    }
+  };
+
+  // Render Admin Room Cards
+  function renderAdminRooms() {
+    const cont = $("adminRoomList");
+    if (!cont) return;
+    cont.innerHTML = "";
+
+    cachedRooms.forEach((r) => {
+      const card = document.createElement("div");
+      card.className = "bg-slate-50 rounded-xl p-4 border border-slate-200 flex flex-col justify-between";
+      card.innerHTML = `
+        <div>
+          <img src="${esc(r.image_url)}" alt="" class="h-36 w-full object-cover rounded-lg mb-3">
+          <div class="flex items-center justify-between mb-1">
+            <h4 class="font-bold text-slate-900">${esc(r.name)}</h4>
+            <span class="text-xs font-black text-emerald-900">${money(r.price)}/nt</span>
+          </div>
+          <p class="text-[11px] text-slate-500 mb-2">${esc(r.sleeps)}</p>
+          <div class="text-[10px] bg-white p-2 rounded border border-slate-200 text-slate-700 space-y-0.5">
+            <div>1h: ₹${r.h1} | 2h: ₹${r.h2}</div>
+            <div>3h: ₹${r.h3} | Whole Day: ₹${r.hday}</div>
+          </div>
+        </div>
+        <div class="flex items-center justify-end gap-2 mt-4 pt-3 border-t border-slate-200">
+          <button class="px-2.5 py-1 bg-emerald-50 text-emerald-800 font-semibold text-xs rounded hover:bg-emerald-100 transition" onclick="window.editRoom('${r.id}')">
+            <i class="fa-solid fa-pen mr-1"></i> Edit Specifications
+          </button>
+        </div>
+      `;
+      cont.appendChild(card);
+    });
+  }
+
+  // Room Drawer Controls
+  $("btnOpenNewRoom").onclick = function() {
+    $("roomForm").reset();
+    $("rfId").value = "";
+    $("roomFormTitle").textContent = "Add New Room Type";
+    $("roomEditDrawer").classList.remove("hidden");
+    $("roomEditDrawer").scrollIntoView({ behavior: "smooth" });
+  };
+
+  $("btnCloseRoomForm").onclick = () => $("roomEditDrawer").classList.add("hidden");
+  $("btnCancelRoomForm").onclick = () => $("roomEditDrawer").classList.add("hidden");
+
+  window.editRoom = function(id) {
+    const r = cachedRooms.find(x => x.id === id);
+    if (!r) return;
+    $("rfId").value = r.id;
+    $("rfName").value = r.name;
+    $("rfBasePrice").value = r.price;
+    $("rfCapacity").value = r.sleeps || "";
+    $("rfImg").value = r.image_url || "";
+    $("rfDesc").value = r.description || "";
+    $("rfH1").value = r.h1;
+    $("rfH2").value = r.h2;
+    $("rfH3").value = r.h3;
+    $("rfHDay").value = r.hday;
+
+    $("roomFormTitle").textContent = "Edit " + r.name;
+    $("roomEditDrawer").classList.remove("hidden");
+    $("roomEditDrawer").scrollIntoView({ behavior: "smooth" });
+  };
+
+  $("roomForm").onsubmit = async function(e) {
+    e.preventDefault();
+    const id = $("rfId").value || ("r_" + Date.now().toString(36));
+    const payload = {
+      name: $("rfName").value.trim(),
+      price: Number($("rfBasePrice").value) || 1500,
+      sleeps: $("rfCapacity").value.trim(),
+      description: $("rfDesc").value.trim(),
+      image_url: $("rfImg").value.trim(),
+      h1: Number($("rfH1").value) || 600,
+      h2: Number($("rfH2").value) || 1000,
+      h3: Number($("rfH3").value) || 1300,
+      hday: Number($("rfHDay").value) || 1500
+    };
+
+    try {
+      const res = await fetch(`${API_BASE}/rooms/${id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) {
+        alert("Room specifications updated in Supabase!");
+        $("roomEditDrawer").classList.add("hidden");
+        loadRooms();
+      }
+    } catch (err) {
+      alert("Error saving room: " + err.message);
+    }
+  };
+
+  // Counter Walk-In Submit
+  $("nGo").onclick = async function() {
+    const name = $("nName").value.trim();
+    const phone = $("nPh").value.replace(/\D/g, "").slice(-10);
+    const idNum = $("nId").value.trim();
+    const err = $("nErr");
+
+    if (name.length < 2) { err.textContent = "Please enter guest name."; return; }
+    if (phone.length !== 10) { err.textContent = "Please enter 10-digit mobile number."; return; }
+
+    const isHour = $("nType").value === "hour";
+    const cin = isHour ? $("nDate").value : $("nIn").value;
+    const cout = isHour ? $("nDate").value : $("nOut").value;
+    const hours = isHour ? Number($("nHrs").value) : 0;
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("phone", phone);
+    formData.append("room_id", $("nRoom").value);
+    formData.append("booking_type", $("nType").value);
+    formData.append("start_date", cin);
+    formData.append("end_date", cout);
+    formData.append("hours", hours.toString());
+    formData.append("guests", "2");
+    formData.append("id_proof", idNum ? `Front Desk: ${idNum}` : "Counter Walk-in");
+
+    try {
+      const res = await fetch(`${API_BASE}/bookings`, {
+        method: "POST",
+        body: formData
+      });
+      if (res.ok) {
+        alert("Counter guest checked in & saved to cloud!");
+        $("nName").value = ""; $("nPh").value = ""; $("nId").value = ""; err.textContent = "";
+        renderAdmin();
+      }
+    } catch (e) {
+      err.textContent = "Failed to save: " + e.message;
+    }
+  };
+
+  $("adminGo").onclick = function() {
+    if ($("au").value.trim() === ADMIN_USER && $("ap").value === ADMIN_PASS) {
+      sessionStorage.setItem("hm_admin", "1");
+      $("ap").value = "";
+      renderAdmin();
+    } else {
+      $("adminErr").textContent = "Invalid username or password.";
+    }
+  };
+
+  $("adminOut").onclick = function() {
+    sessionStorage.removeItem("hm_admin");
+    renderAdmin();
+  };
+
+  // ---------------- TABS & LISTENERS ----------------
+  $("tabNightly").onclick = function() {
+    stayMode = "night";
+    this.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-emerald-800 text-white shadow transition flex items-center gap-2";
+    $("tabHourly").className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 hover:bg-slate-100 transition flex items-center gap-2";
+    document.querySelectorAll(".b-night").forEach(el => el.classList.remove("hidden"));
+    document.querySelectorAll(".b-hour").forEach(el => el.classList.add("hidden"));
+    refreshLiveQuote();
+  };
+
+  $("tabHourly").onclick = function() {
+    stayMode = "hour";
+    this.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-emerald-800 text-white shadow transition flex items-center gap-2";
+    $("tabNightly").className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 hover:bg-slate-100 transition flex items-center gap-2";
+    document.querySelectorAll(".b-night").forEach(el => el.classList.add("hidden"));
+    document.querySelectorAll(".b-hour").forEach(el => el.classList.remove("hidden"));
+    refreshLiveQuote();
+  };
+
+  ["rtype", "cin", "cout", "hDuration"].forEach(id => {
+    const el = $(id);
+    if (el) el.addEventListener("change", refreshLiveQuote);
+  });
+
+  $("nType").onchange = function() {
+    const isHour = this.value === "hour";
+    document.querySelectorAll(".adm-gn").forEach(e => e.classList.toggle("hidden", isHour));
+    document.querySelectorAll(".adm-gh").forEach(e => e.classList.toggle("hidden", !isHour));
+  };
+
+  const today = new Date().toISOString().slice(0, 10);
+  const tom = new Date(); tom.setDate(tom.getDate() + 1);
+  const tomorrow = tom.toISOString().slice(0, 10);
+
+  if ($("cin")) { $("cin").min = today; $("cin").value = today; }
+  if ($("cout")) { $("cout").min = today; $("cout").value = tomorrow; }
+  if ($("hDate")) { $("hDate").min = today; $("hDate").value = today; }
+  if ($("nIn")) { $("nIn").value = today; }
+  if ($("nOut")) { $("nOut").value = tomorrow; }
+  if ($("nDate")) { $("nDate").value = today; }
+
+  function route() {
+    const isAdmin = location.hash === "#admin";
+    $("site").hidden = isAdmin;
+    $("adminPage").hidden = !isAdmin;
+    if (isAdmin) renderAdmin();
+  }
+
+  window.addEventListener("hashchange", route);
+
+  loadConfig();
+  loadRooms();
+  route();
+})();
+</script>
+</body>
+</html>
