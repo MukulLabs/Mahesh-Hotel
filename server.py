@@ -3,43 +3,74 @@ import hmac
 import hashlib
 from datetime import datetime, timedelta
 from typing import Optional, List, Dict, Any
-from fastapi import FastAPI, Depends, HTTPException, status, Header, Form
+
+from fastapi import FastAPI, HTTPException, status, Depends, Header, Form, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from supabase import create_client, Client
 
-app = FastAPI(title="Hotel Mahesh API", version="2.5.0", docs_url=None, redoc_url=None, openapi_url=None)
+# Brute-force protection libraries
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 
-# 1. CORS CONFIGURATION
+# Optional Supabase client (if installed and configured)
+try:
+    from supabase import create_client, Client
+except ImportError:
+    create_client = None
+    Client = Any
+
+# ==========================================
+# 1. INITIALIZATION & SECURITY SETUP
+# ==========================================
+limiter = Limiter(key_func=get_remote_address)
+
+# Disabled auto-generated docs in production to prevent schema scraping
+app = FastAPI(
+    title="Hotel Mahesh API",
+    version="2.1.0",
+    docs_url=None,
+    redoc_url=None,
+    openapi_url=None
+)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+# Strict CORS: only allow requests from your actual frontend sites
+ALLOWED_ORIGINS = [
+    "https://mukullabs.github.io",
+    "https://hotelmahesh.com",
+    "https://www.hotelmahesh.com",
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://mukullabs.github.io",
-        "https://hotelmahesh.in",
-        "https://www.hotelmahesh.in"
-    ],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PATCH", "DELETE"],
+    allow_methods=["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
-# 2. ENVIRONMENT VARIABLES
+# ==========================================
+# 2. CREDENTIALS & PERSISTENCE
+# ==========================================
 ADMIN_USERNAME = os.getenv("HOTEL_ADMIN_USER", "admin")
 ADMIN_PASSWORD = os.getenv("HOTEL_ADMIN_PASS", "mahesh@123")
 AUTH_SECRET_KEY = os.getenv("AUTH_SECRET_KEY", "hotel-mahesh-sasaram-secure-key-2026")
-SUPABASE_URL = os.getenv("SUPABASE_URL", "")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY", "")
 
-# 3. SUPABASE CLIENT INITIALIZATION
-supabase: Optional[Client] = None
-if SUPABASE_URL and SUPABASE_KEY:
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+supabase_client: Optional[Client] = None
+if create_client and SUPABASE_URL and SUPABASE_KEY:
     try:
-        supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
-        print("Connected to Supabase PostgreSQL Database successfully.")
+        supabase_client = create_client(SUPABASE_URL, SUPABASE_KEY)
     except Exception as e:
-        print(f"Supabase connection warning: {e}")
+        print(f"Warning: Failed to connect to Supabase: {e}")
 
-# In-memory fallbacks if Supabase env keys are temporarily missing
+# In-Memory Fallback State (operational buffer)
 state_config = {
     "upi_id": "hotelmahesh@upi",
     "d2": 20,
@@ -48,11 +79,51 @@ state_config = {
     "event_full": 1000,
     "event_six": 400
 }
-state_rooms: List[Dict[str, Any]] = []
-state_gallery: List[Dict[str, Any]] = []
+
+state_rooms = [
+    {
+        "id": "deluxe_ac",
+        "name": "Executive AC Deluxe Room",
+        "price": 2200,
+        "sleeps": "Sleeps 2 Guests · 1 King Bed",
+        "description": "Air-conditioned premium suite featuring smart TV, ambient panel lighting, and marble en-suite bathroom.",
+        "image_url": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80",
+        "h1": 600, "h2": 1000, "h3": 1300, "hday": 1500
+    },
+    {
+        "id": "family_suite",
+        "name": "Presidential Family Suite",
+        "price": 3500,
+        "sleeps": "Sleeps 4 to 5 Guests · 2 Queen Beds",
+        "description": "Spacious dual double-bed family accommodation with high ceilings, full cooling, and luggage wardrobe.",
+        "image_url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80",
+        "h1": 1000, "h2": 1800, "h3": 2400, "hday": 3000
+    },
+    {
+        "id": "standard_nonac",
+        "name": "Classic Comfort Room",
+        "price": 1400,
+        "sleeps": "Sleeps 2 Guests · 1 Double Bed",
+        "description": "Clean, budget-conscious transit room with ceiling fan, writing table, and hot water shower.",
+        "image_url": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80",
+        "h1": 400, "h2": 700, "h3": 900, "hday": 1200
+    }
+]
+
+state_gallery = [
+    {"id": "g1", "album": "rooms", "title": "Deluxe Suite Bed", "url": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80"},
+    {"id": "g2", "album": "rooms", "title": "Family Room Interior", "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80"},
+    {"id": "g3", "album": "banquets", "title": "Grand Wedding Mandap", "url": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80"},
+    {"id": "g4", "album": "banquets", "title": "Reception Dining Hall", "url": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80"},
+    {"id": "g5", "album": "premises", "title": "Hotel Reception & Desk", "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80"},
+    {"id": "g6", "album": "premises", "title": "Exterior Night Lighting", "url": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80"}
+]
+
 state_bookings: List[Dict[str, Any]] = []
 
-# 4. TOKEN CRYPTOGRAPHY
+# ==========================================
+# 3. HELPER & SECURITY FUNCTIONS
+# ==========================================
 def generate_token(username: str) -> str:
     expiry = (datetime.utcnow() + timedelta(days=2)).strftime("%Y%m%d%H%M")
     raw = f"{username}:{expiry}:{AUTH_SECRET_KEY}".encode("utf-8")
@@ -61,7 +132,10 @@ def generate_token(username: str) -> str:
 
 def verify_admin_token(authorization: Optional[str] = Header(None)) -> str:
     if not authorization or not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Missing authorization token.")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Missing or malformed authorization header."
+        )
     token = authorization.split(" ")[1]
     try:
         parts = token.split(".")
@@ -70,6 +144,7 @@ def verify_admin_token(authorization: Optional[str] = Header(None)) -> str:
         user, expiry, sig = parts
         expected_raw = f"{user}:{expiry}:{AUTH_SECRET_KEY}".encode("utf-8")
         expected_sig = hashlib.sha256(expected_raw).hexdigest()
+        
         if not hmac.compare_digest(sig, expected_sig):
             raise HTTPException(status_code=401, detail="Invalid token signature.")
         if datetime.utcnow().strftime("%Y%m%d%H%M") > expiry:
@@ -78,7 +153,24 @@ def verify_admin_token(authorization: Optional[str] = Header(None)) -> str:
     except Exception:
         raise HTTPException(status_code=401, detail="Invalid or expired session.")
 
-# 5. DATA MODELS
+def sanitize_id_proof(raw_proof: str) -> str:
+    """Masks Government ID numbers to comply with DPDP privacy guidelines."""
+    if not raw_proof:
+        return "Not Provided"
+    parts = raw_proof.split(":")
+    if len(parts) > 1:
+        doc_type = parts[0].strip()
+        val = parts[1].strip()
+        last4 = val[-4:] if len(val) >= 4 else val
+        return f"{doc_type}: Ending in {last4}"
+    
+    val = raw_proof.strip()
+    last4 = val[-4:] if len(val) >= 4 else val
+    return f"ID Ending in {last4}"
+
+# ==========================================
+# 4. REQUEST SCHEMAS
+# ==========================================
 class LoginRequest(BaseModel):
     username: str
     password: str
@@ -108,121 +200,77 @@ class GalleryPayload(BaseModel):
     title: str
     url: str
 
-# 6. API ENDPOINTS
+# ==========================================
+# 5. API ENDPOINTS
+# ==========================================
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "database": "connected" if supabase else "fallback", "time": datetime.utcnow().isoformat()}
+    return {"status": "ok", "time": datetime.utcnow().isoformat()}
 
+# Rate-limited login: Max 5 attempts per minute to mitigate brute-force attacks
 @app.post("/api/auth/login")
-def login(payload: LoginRequest):
+@limiter.limit("5/minute")
+def login(request: Request, payload: LoginRequest):
     user_ok = hmac.compare_digest(payload.username.encode("utf-8"), ADMIN_USERNAME.encode("utf-8"))
     pass_ok = hmac.compare_digest(payload.password.encode("utf-8"), ADMIN_PASSWORD.encode("utf-8"))
+    
     if not (user_ok and pass_ok):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid username or password.")
+    
     token = generate_token(payload.username)
     return {"token": token, "status": "authenticated"}
 
-# CONFIGURATION ENDPOINTS
 @app.get("/api/config")
 def get_config():
-    if supabase:
-        try:
-            res = supabase.table("hotel_config").select("*").eq("id", 1).execute()
-            if res.data:
-                return res.data[0]
-        except Exception as e:
-            print(f"Error reading config from Supabase: {e}")
     return state_config
 
 @app.post("/api/config")
 def save_config(payload: ConfigPayload, user: str = Depends(verify_admin_token)):
     global state_config
     state_config = payload.dict()
-    if supabase:
-        try:
-            data = payload.dict()
-            data["id"] = 1
-            supabase.table("hotel_config").upsert(data).execute()
-        except Exception as e:
-            print(f"Error saving config to Supabase: {e}")
     return {"status": "success", "config": state_config}
 
-# ROOMS ENDPOINTS
 @app.get("/api/rooms")
 def get_rooms():
-    if supabase:
-        try:
-            res = supabase.table("rooms").select("*").execute()
-            if res.data and len(res.data) > 0:
-                return res.data
-        except Exception as e:
-            print(f"Error reading rooms from Supabase: {e}")
     return state_rooms
 
 @app.post("/api/rooms/{room_id}")
 def save_room(room_id: str, payload: RoomPayload, user: str = Depends(verify_admin_token)):
-    room_data = payload.dict()
-    room_data["id"] = room_id
-    if supabase:
-        try:
-            supabase.table("rooms").upsert(room_data).execute()
-            return {"status": "persisted", "room": room_data}
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=f"Supabase database error: {e}")
-    
-    # In-memory fallback
     for idx, r in enumerate(state_rooms):
         if r["id"] == room_id:
-            state_rooms[idx] = room_data
-            return {"status": "updated", "room": room_data}
-    state_rooms.append(room_data)
-    return {"status": "created", "room": room_data}
+            updated = payload.dict()
+            updated["id"] = room_id
+            state_rooms[idx] = updated
+            return {"status": "updated", "room": updated}
+    
+    new_r = payload.dict()
+    new_r["id"] = room_id
+    state_rooms.append(new_r)
+    return {"status": "created", "room": new_r}
 
-# GALLERY ENDPOINTS (Persists Drive Photos)
 @app.get("/api/gallery")
 def get_gallery():
-    if supabase:
-        try:
-            res = supabase.table("gallery").select("*").order("created_at", desc=False).execute()
-            if res.data and len(res.data) > 0:
-                return res.data
-        except Exception as e:
-            print(f"Error fetching gallery from Supabase: {e}")
     return state_gallery
 
 @app.post("/api/gallery")
 def add_gallery_item(payload: GalleryPayload, user: str = Depends(verify_admin_token)):
-    item = payload.dict()
-    if supabase:
-        try:
-            supabase.table("gallery").upsert(item).execute()
-            return {"status": "saved_to_database", "item": item}
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=f"Failed to persist photo in Supabase: {e}")
-    state_gallery.append(item)
-    return {"status": "saved_in_memory", "item": item}
+    state_gallery.append(payload.dict())
+    return {"status": "success", "item": payload}
 
 @app.delete("/api/gallery/{item_id}")
 def delete_gallery_item(item_id: str, user: str = Depends(verify_admin_token)):
-    if supabase:
-        try:
-            supabase.table("gallery").delete().eq("id", item_id).execute()
-            return {"status": "deleted_from_database"}
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=f"Failed to delete photo from Supabase: {e}")
     global state_gallery
     state_gallery = [g for g in state_gallery if g["id"] != item_id]
-    return {"status": "deleted_from_memory"}
+    return {"status": "deleted"}
 
-# BOOKINGS ENDPOINTS
 @app.get("/api/bookings")
 def get_bookings(user: str = Depends(verify_admin_token)):
-    if supabase:
+    if supabase_client:
         try:
-            res = supabase.table("bookings").select("*").order("created_at", desc=True).execute()
+            res = supabase_client.table("bookings").select("*").order("created_at", desc=True).execute()
             return res.data
         except Exception as e:
-            print(f"Error fetching bookings from Supabase: {e}")
+            print(f"Supabase read error: {e}")
     return state_bookings
 
 @app.post("/api/bookings")
@@ -237,18 +285,7 @@ def create_booking(
     guests: int = Form(2),
     id_proof: str = Form(...)
 ):
-    # Lookup room price either from Supabase or fallback
-    room = None
-    if supabase:
-        try:
-            r_res = supabase.table("rooms").select("*").eq("id", room_id).execute()
-            if r_res.data:
-                room = r_res.data[0]
-        except Exception:
-            pass
-    if not room:
-        room = next((r for r in state_rooms if r["id"] == room_id), {"name": "Deluxe Room", "price": 2200, "h1": 600, "h2": 1000, "h3": 1300, "hday": 1500})
-
+    room = next((r for r in state_rooms if r["id"] == room_id), state_rooms[0])
     total = 0
     discount_pct = 0
 
@@ -268,6 +305,7 @@ def create_booking(
             nights = max(1, (d_end - d_start).days)
         except Exception:
             nights = 1
+            
         base = nights * room.get("price", 2200)
         if nights == 2:
             discount_pct = state_config.get("d2", 20)
@@ -278,18 +316,22 @@ def create_booking(
         total = round(base * (1 - (discount_pct / 100)))
 
     booking_id = f"HM{int(datetime.utcnow().timestamp())}"
+    
+    # Store masked version of government ID
+    safe_document_ref = sanitize_id_proof(id_proof)
+
     new_booking = {
         "id": booking_id,
         "guest_name": name,
         "phone": phone,
         "room_id": room_id,
-        "room_name": room.get("name", "Standard Room"),
+        "room_name": room["name"],
         "booking_type": booking_type,
         "start_date": start_date,
         "end_date": end_date,
         "hours": hours,
         "guests": guests,
-        "document_url": id_proof,
+        "document_url": safe_document_ref,
         "total": total,
         "discount_pct": discount_pct,
         "status": "Pending",
@@ -297,12 +339,12 @@ def create_booking(
         "check_in_time": None,
         "created_at": datetime.utcnow().isoformat()
     }
-
-    if supabase:
+    
+    if supabase_client:
         try:
-            supabase.table("bookings").insert(new_booking).execute()
+            supabase_client.table("bookings").insert(new_booking).execute()
         except Exception as e:
-            print(f"Error persisting booking in Supabase: {e}")
+            print(f"Supabase insert error: {e}")
             state_bookings.insert(0, new_booking)
     else:
         state_bookings.insert(0, new_booking)
@@ -323,19 +365,19 @@ def update_booking_status(
     if check_in_time:
         update_data["check_in_time"] = check_in_time
 
-    if supabase:
+    if supabase_client:
         try:
-            res = supabase.table("bookings").update(update_data).eq("id", booking_id).execute()
+            res = supabase_client.table("bookings").update(update_data).eq("id", booking_id).execute()
             if res.data:
                 return {"status": "success", "booking": res.data[0]}
         except Exception as e:
-            raise HTTPException(status_code=500, detail=f"Database update failed: {e}")
+            print(f"Supabase update error: {e}")
 
     for b in state_bookings:
         if str(b["id"]) == str(booking_id):
             b.update(update_data)
             return {"status": "success", "booking": b}
-
+            
     raise HTTPException(status_code=404, detail="Booking record not found.")
 
 if __name__ == "__main__":
