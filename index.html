@@ -1050,7 +1050,7 @@
   }
 
   function getAuthHeaders(extraHeaders = {}) {
-    const token = sessionStorage.getItem("hm_staff_token") || localStorage.getItem("hm_staff_token") || "";
+    const token = sessionStorage.getItem("hm_staff_token") || "";
     return {
       ...extraHeaders,
       "Authorization": `Bearer ${token}`
@@ -1058,7 +1058,7 @@
   }
 
   function adminOn() {
-    return !!(sessionStorage.getItem("hm_staff_token") || localStorage.getItem("hm_staff_token"));
+    return !!sessionStorage.getItem("hm_staff_token");
   }
 
   // ---------------- PERSISTENT SYNC SERVICES ----------------
@@ -2147,8 +2147,9 @@ We look forward to welcoming you!`;
   };
 
   $("adminOut").onclick = function() {
-    sessionStorage.removeItem("hm_staff_token");
+    sessionStorage.clear();
     localStorage.removeItem("hm_staff_token");
+    localStorage.removeItem("hm_saved_bookings");
     window.location.hash = "";
     route();
   };
