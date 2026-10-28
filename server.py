@@ -13,9 +13,13 @@ app = FastAPI(title="Hotel Mahesh API", version="2.5.0", docs_url=None, redoc_ur
 # 1. CORS CONFIGURATION
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://mukullabs.github.io",
+        "https://hotelmahesh.in",
+        "https://www.hotelmahesh.in"
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PATCH", "DELETE"],
     allow_headers=["*"],
 )
 
