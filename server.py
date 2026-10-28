@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from supabase import create_client, Client
 
-app = FastAPI(title="Hotel Mahesh API", version="2.5.0")
+app = FastAPI(title="Hotel Mahesh API", version="2.5.0", docs_url=None, redoc_url=None, openapi_url=None)
 
 # 1. CORS CONFIGURATION
 app.add_middleware(
