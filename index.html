@@ -1644,7 +1644,6 @@ We look forward to welcoming you!`;
         if (res.ok) {
           const authData = await res.json();
           sessionStorage.setItem("hm_staff_token", authData.token);
-          localStorage.setItem("hm_staff_token", authData.token);
           errBox.textContent = "";
           adminAuthModal.close();
           $("modalAp").value = "";
