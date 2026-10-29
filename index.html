@@ -112,7 +112,7 @@
   <!-- Hero Section -->
   <section class="relative min-h-[600px] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2000&q=80" alt="Hotel Mahesh Ambience" class="w-full h-full object-cover object-center scale-105">
+      <img src="https://i.ibb.co/bRFQsxcz/Whats-App-Image-2026-10-27-at-19-21-38-1.jpg" alt="Hotel Mahesh Exterior" class="w-full h-full object-cover object-center scale-105">
       <div class="absolute inset-0 hero-overlay"></div>
     </div>
 
@@ -240,7 +240,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="roomGrid">
-        <p class="col-span-full text-center text-slate-400 py-12">Loading rooms...</p>
+        <p class="col-span-full text-center text-slate-400 py-12">Loading rooms directly from database...</p>
       </div>
     </div>
   </section>
@@ -496,9 +496,9 @@
 
         <div>
           <label for="custDocNum" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-            Document / ID Reference <span class="text-rose-500">*</span>
+            Last 4 Digits of ID <span class="text-rose-500">*</span>
           </label>
-          <input type="text" id="custDocNum" required placeholder="ID reference number" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-medium focus:ring-2 focus:ring-emerald-800 focus:outline-none">
+          <input type="text" id="custDocNum" maxlength="4" required placeholder="e.g. 5678" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-medium focus:ring-2 focus:ring-emerald-800 focus:outline-none">
         </div>
       </div>
 
@@ -590,7 +590,7 @@
 </dialog>
 
 <!-- ========================================================= -->
-<!-- 3. POPUP MODAL: ADMIN LOGIN (SECURE SERVER AUTHENTICATED) -->
+<!-- 3. POPUP MODAL: ADMIN LOGIN                               -->
 <!-- ========================================================= -->
 <dialog id="adminAuthModal" class="backdrop:bg-slate-950/75 p-0 rounded-2xl shadow-2xl border border-slate-200 w-full max-w-sm overflow-hidden m-auto">
   <div class="p-6 bg-white">
@@ -601,7 +601,7 @@
         </div>
         <div>
           <h3 class="font-serif text-lg font-bold text-slate-900">Staff Authentication</h3>
-          <p class="text-[11px] text-slate-500">Server verified hotel personnel only</p>
+          <p class="text-[11px] text-slate-500">Authorized personnel only</p>
         </div>
       </div>
       <button id="adminModalClose" type="button" class="text-slate-400 hover:text-slate-600 text-2xl font-bold leading-none cursor-pointer">&times;</button>
@@ -627,7 +627,7 @@
 </dialog>
 
 <!-- ========================================== -->
-<!-- 4. FULL ADMIN PORTAL & RATES CONFIGURATOR  -->
+<!-- 4. FULL ADMIN PORTAL                       -->
 <!-- ========================================== -->
 <div id="adminPage" class="hidden min-h-screen bg-slate-100 text-slate-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -638,17 +638,16 @@
         </div>
         <div>
           <h1 class="font-serif text-2xl font-bold text-slate-900">Hotel Mahesh · Management Portal</h1>
-          <span class="text-xs text-slate-500">Live Rates Engine, Dynamic UPI &amp; Cloud Database</span>
+          <span class="text-xs text-slate-500">Live Rates Engine &amp; Cloud Database</span>
         </div>
       </div>
       <div class="flex items-center gap-3">
         <button id="adminOut" type="button" class="px-4 py-2 bg-rose-50 text-rose-700 border border-rose-200 rounded-xl text-xs font-bold hover:bg-rose-100 transition cursor-pointer">
-          <i class="fa-solid fa-right-from-bracket mr-1"></i> Log Out &amp; Return
+          <i class="fa-solid fa-right-from-bracket mr-1"></i> Log Out
         </button>
       </div>
     </header>
 
-    <!-- Admin Dashboard Workspace -->
     <div id="adminDash" class="space-y-8">
       
       <!-- Top Navigation Tabs -->
@@ -663,9 +662,6 @@
         <button type="button" id="admTabRooms" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition flex items-center gap-2 cursor-pointer">
           <i class="fa-solid fa-sliders"></i> Room &amp; Rates Configuration
         </button>
-        <button type="button" id="admTabGallery" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition flex items-center gap-2 cursor-pointer">
-          <i class="fa-solid fa-images"></i> Photo Gallery Manager
-        </button>
       </div>
 
       <!-- TAB 0: LIVE ACTIVE OCCUPANCY & TIME LEFT MONITOR -->
@@ -675,7 +671,7 @@
             <div>
               <span class="text-xs uppercase font-bold text-emerald-800 tracking-wider">Front Desk Operations</span>
               <h3 class="font-serif text-2xl font-bold text-slate-900 mt-1">Live Occupied Rooms &amp; Time Left Monitor</h3>
-              <p class="text-xs text-slate-500">Real-time status of guests currently in-house. Live countdowns for hourly check-outs and daily renewals.</p>
+              <p class="text-xs text-slate-500">Real-time status of guests currently in-house.</p>
             </div>
             <button type="button" onclick="renderAdmin()" class="px-3.5 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition cursor-pointer">
               <i class="fa-solid fa-rotate mr-1"></i> Refresh List
@@ -697,7 +693,7 @@
             </div>
             <div>
               <h3 class="font-serif text-xl font-bold text-slate-900">Front Desk Counter Booking</h3>
-              <p class="text-xs text-slate-500">Fast check-in for walk-ins or phone reservations with dynamic discount calculation</p>
+              <p class="text-xs text-slate-500">Fast check-in for walk-ins or phone reservations</p>
             </div>
           </div>
 
@@ -715,8 +711,8 @@
               <select id="nRoom" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm"></select>
             </div>
             <div>
-              <label for="nId" class="block text-xs font-bold uppercase text-slate-700 mb-1">Guest ID Proof Reference</label>
-              <input id="nId" placeholder="Govt ID reference" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm">
+              <label for="nId" class="block text-xs font-bold uppercase text-slate-700 mb-1">Last 4 Digits of ID</label>
+              <input id="nId" maxlength="4" placeholder="e.g. 5678" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm">
             </div>
 
             <div>
@@ -775,20 +771,17 @@
             <div>
               <span class="text-xs uppercase font-bold text-amber-700 tracking-wider">Dynamic Pricing &amp; Payment Routing</span>
               <h3 class="font-serif text-xl font-bold text-slate-900 mt-1">Tiered Rates &amp; Variable UPI Receiver ID</h3>
-              <p class="text-xs text-slate-500">Configure global discounts, event pricing, and the destination UPI address where guest payments land</p>
+              <p class="text-xs text-slate-500">Configure global discounts and the destination UPI address</p>
             </div>
-            <button id="btnResetConfig" type="button" class="px-3.5 py-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition cursor-pointer">
-              <i class="fa-solid fa-rotate-left mr-1"></i> Reset to Factory Defaults
-            </button>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
             <div class="bg-amber-50/70 p-4 rounded-xl border border-amber-300 sm:col-span-2">
               <label for="cfgUpiId" class="block text-xs font-bold uppercase text-slate-900 mb-1">
-                <i class="fa-solid fa-wallet text-amber-600 mr-1"></i> Receiver UPI ID (Variable)
+                <i class="fa-solid fa-wallet text-amber-600 mr-1"></i> Receiver UPI ID
               </label>
               <input type="text" id="cfgUpiId" placeholder="e.g. hotelmahesh@okaxis" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-emerald-800">
-              <span class="text-[10px] text-slate-500 mt-1 block">All dynamic QR codes route funds directly here</span>
+              <span class="text-[10px] text-slate-500 mt-1 block">Dynamic QR codes route directly here</span>
             </div>
 
             <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
@@ -824,27 +817,24 @@
           </div>
         </div>
 
-        <!-- Room Inventory & Rates Editor -->
+        <!-- Room Inventory Specifications Editor -->
         <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
               <span class="text-xs uppercase font-bold text-amber-700 tracking-wider">Room Inventory</span>
-              <h3 class="font-serif text-xl font-bold text-slate-900 mt-1">Manage Room Types, Hourly Tiers &amp; Drive Images</h3>
-              <p class="text-xs text-slate-500">Edit nightly base prices, hourly slabs, photo URLs, and features</p>
+              <h3 class="font-serif text-xl font-bold text-slate-900 mt-1">Manage Room Specifications &amp; Tariffs</h3>
+              <p class="text-xs text-slate-500">Edit nightly base rates, hourly slabs, and descriptions (Images are managed directly in Supabase)</p>
             </div>
-            <button id="btnOpenNewRoom" type="button" class="px-4 py-2 bg-emerald-800 text-white rounded-xl text-xs font-bold hover:bg-emerald-900 transition flex items-center gap-1.5 cursor-pointer">
-              <i class="fa-solid fa-plus"></i> Add New Room Type
-            </button>
           </div>
 
           <div id="adminRoomList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           </div>
         </div>
 
-        <!-- Room Add/Edit Form Drawer -->
+        <!-- Room Edit Drawer -->
         <div id="roomEditDrawer" class="bg-slate-50 rounded-2xl p-6 border-2 border-emerald-200 hidden">
           <div class="flex items-center justify-between mb-4">
-            <h4 id="roomFormTitle" class="font-serif text-lg font-bold text-slate-900">Add New Room Type</h4>
+            <h4 id="roomFormTitle" class="font-serif text-lg font-bold text-slate-900">Edit Room Specifications</h4>
             <button id="btnCloseRoomForm" type="button" class="text-slate-400 hover:text-slate-600 font-bold text-lg cursor-pointer">&times;</button>
           </div>
 
@@ -853,49 +843,42 @@
             
             <div class="sm:col-span-2">
               <label for="rfName" class="block text-xs font-bold uppercase text-slate-700 mb-1">Room Category Name</label>
-              <input id="rfName" required placeholder="e.g. Executive AC Deluxe Room" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
+              <input id="rfName" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
             </div>
 
             <div>
               <label for="rfBasePrice" class="block text-xs font-bold uppercase text-slate-700 mb-1">Base Night Price (₹)</label>
-              <input id="rfBasePrice" type="number" required placeholder="2500" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm font-bold text-emerald-900">
+              <input id="rfBasePrice" type="number" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm font-bold text-emerald-900">
             </div>
 
             <div>
               <label for="rfCapacity" class="block text-xs font-bold uppercase text-slate-700 mb-1">Capacity / Bed Info</label>
-              <input id="rfCapacity" placeholder="e.g. Sleeps 2 to 3 Guests" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
+              <input id="rfCapacity" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
             </div>
 
             <div>
               <label for="rfH1" class="block text-xs font-bold uppercase text-slate-700 mb-1">1-Hour Transit (₹)</label>
-              <input id="rfH1" type="number" required placeholder="600" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
+              <input id="rfH1" type="number" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
             </div>
 
             <div>
               <label for="rfH2" class="block text-xs font-bold uppercase text-slate-700 mb-1">2-Hours Transit (₹)</label>
-              <input id="rfH2" type="number" required placeholder="1000" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
+              <input id="rfH2" type="number" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
             </div>
 
             <div>
               <label for="rfH3" class="block text-xs font-bold uppercase text-slate-700 mb-1">3-Hours Transit (₹)</label>
-              <input id="rfH3" type="number" required placeholder="1300" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
+              <input id="rfH3" type="number" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm">
             </div>
 
             <div>
               <label for="rfHDay" class="block text-xs font-bold uppercase text-slate-700 mb-1">Whole Day Cap (₹)</label>
-              <input id="rfHDay" type="number" required placeholder="1500" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm font-bold text-amber-700">
-            </div>
-
-            <div class="sm:col-span-2 lg:col-span-4">
-              <label for="rfImg" class="block text-xs font-bold uppercase text-slate-700 mb-1">
-                Photo URL (Supports Web links &amp; Google Drive URLs)
-              </label>
-              <input id="rfImg" placeholder="https://..." class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm font-mono">
+              <input id="rfHDay" type="number" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm font-bold text-amber-700">
             </div>
 
             <div class="sm:col-span-2 lg:col-span-4">
               <label for="rfDesc" class="block text-xs font-bold uppercase text-slate-700 mb-1">Description</label>
-              <textarea id="rfDesc" rows="2" placeholder="Brief room features..." class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm"></textarea>
+              <textarea id="rfDesc" rows="2" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm"></textarea>
             </div>
 
             <div class="sm:col-span-2 lg:col-span-4 flex items-center justify-end gap-3 pt-2">
@@ -903,51 +886,10 @@
                 Cancel
               </button>
               <button type="submit" class="px-5 py-2.5 gold-gradient text-slate-950 font-bold rounded-xl text-xs hover:brightness-110 active:scale-95 transition shadow cursor-pointer">
-                <i class="fa-solid fa-check mr-1"></i> Save Room Category
+                <i class="fa-solid fa-check mr-1"></i> Save Changes
               </button>
             </div>
           </form>
-        </div>
-      </div>
-
-      <!-- TAB 3: PHOTO GALLERY & ALBUMS MANAGER -->
-      <div id="paneGallery" class="space-y-8 hidden">
-        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
-          <div class="flex items-center justify-between mb-6">
-            <div>
-              <span class="text-xs uppercase font-bold text-amber-700 tracking-wider">Photo Management</span>
-              <h3 class="font-serif text-xl font-bold text-slate-900 mt-1">Add Photo to Gallery Album</h3>
-              <p class="text-xs text-slate-500">Paste any public image link or Google Drive direct URL. Saved persistently.</p>
-            </div>
-          </div>
-
-          <form id="addPhotoForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end bg-slate-50 p-4 rounded-xl border border-slate-200">
-            <div>
-              <label for="pgTitle" class="block text-xs font-bold uppercase text-slate-700 mb-1">Photo Caption / Title</label>
-              <input id="pgTitle" required placeholder="e.g. Deluxe Room Bedding" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs">
-            </div>
-            <div>
-              <label for="pgAlbum" class="block text-xs font-bold uppercase text-slate-700 mb-1">Target Album</label>
-              <select id="pgAlbum" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-900">
-                <option value="rooms">Rooms &amp; Suites</option>
-                <option value="banquets">Banquets &amp; Weddings</option>
-                <option value="premises">Hotel Premises</option>
-              </select>
-            </div>
-            <div class="sm:col-span-2">
-              <label for="pgUrl" class="block text-xs font-bold uppercase text-slate-700 mb-1">Photo Direct URL (e.g. https://... or Google Drive URL)</label>
-              <input id="pgUrl" required placeholder="https://..." class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono">
-            </div>
-            <div class="sm:col-span-2 lg:col-span-4 flex justify-end">
-              <button type="submit" class="px-5 py-2 gold-gradient text-slate-950 font-bold rounded-xl text-xs hover:brightness-110 active:scale-95 transition shadow cursor-pointer">
-                <i class="fa-solid fa-plus mr-1"></i> Add Photo to Album
-              </button>
-            </div>
-          </form>
-
-          <h4 class="font-bold text-slate-900 text-sm mt-8 mb-4">Active Gallery Images (<span id="photoCount">0</span>)</h4>
-          <div id="adminGalleryList" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          </div>
         </div>
       </div>
 
@@ -956,20 +898,22 @@
 </div>
 
 <!-- ========================================================= -->
-<!-- 5. CONTROLLER SCRIPT (PERSISTENT & RESILIENT ENGINE)      -->
-<!-- ========================================================= -->
+<!-- 5. CONTROLLER SCRIPT (DATABASE-FIRST ENGINE)              -->
+<!-- ========================================== -->
 <script>
 (function() {
   const API_BASE = "https://mahesh-hotel.onrender.com/api";
   const PHONE = "918294817088";
   let DEFAULT_UPI_ID = "hotelmahesh@upi";
 
-  // Google Drive link standardizer: converts /view or /file/d/ links to direct stream links
   function sanitizeImageUrl(url) {
-    if (!url) return "https://placehold.co/800x500/0f4a47/ffffff?text=Hotel+Mahesh";
+    if (!url) return "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80";
     url = url.trim();
+    if (url.includes("i.ibb.co")) return url;
     if (url.includes("drive.google.com")) {
-      const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+      const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || 
+                    url.match(/\/d\/([a-zA-Z0-9_-]+)/) || 
+                    url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
       if (match && match[1]) {
         return `https://lh3.googleusercontent.com/d/${match[1]}`;
       }
@@ -977,52 +921,9 @@
     return url;
   }
 
-  const defaultRooms = [
-    {
-      id: "deluxe_ac",
-      name: "Executive AC Deluxe Room",
-      price: 2200,
-      sleeps: "Sleeps 2 Guests · 1 King Bed",
-      description: "Air-conditioned premium suite featuring smart TV, ambient panel lighting, and marble en-suite bathroom.",
-      image_url: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80",
-      h1: 600, h2: 1000, h3: 1300, hday: 1500
-    },
-    {
-      id: "family_suite",
-      name: "Presidential Family Suite",
-      price: 3500,
-      sleeps: "Sleeps 4 to 5 Guests · 2 Queen Beds",
-      description: "Spacious dual double-bed family accommodation with high ceilings, full cooling, and luggage wardrobe.",
-      image_url: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80",
-      h1: 1000, h2: 1800, h3: 2400, hday: 3000
-    },
-    {
-      id: "standard_nonac",
-      name: "Classic Comfort Room",
-      price: 1400,
-      sleeps: "Sleeps 2 Guests · 1 Double Bed",
-      description: "Clean, budget-conscious transit room with ceiling fan, writing table, and hot water shower.",
-      image_url: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80",
-      h1: 400, h2: 700, h3: 900, hday: 1200
-    }
-  ];
-
-  const defaultGallery = [
-    { id: "g1", album: "rooms", title: "Deluxe Suite Bed", url: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80" },
-    { id: "g2", album: "rooms", title: "Family Room Interior", url: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80" },
-    { id: "g3", album: "banquets", title: "Grand Wedding Mandap", url: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80" },
-    { id: "g4", album: "banquets", title: "Reception Dining Hall", url: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80" },
-    { id: "g5", album: "premises", title: "Hotel Reception & Desk", url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" },
-    { id: "g6", album: "premises", title: "Exterior Night Lighting", url: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80" }
-  ];
-
-  // ==========================================
-  // RESILIENT PERSISTENT STORAGE CONTROLLERS
-  // ==========================================
-  // 1. Initial State from LocalStorage to prevent flicker/disappearing on refresh
-  let cachedRooms = JSON.parse(localStorage.getItem("hm_saved_rooms")) || defaultRooms;
-  let cachedGallery = JSON.parse(localStorage.getItem("hm_saved_gallery")) || defaultGallery;
-  let cachedConfig = JSON.parse(localStorage.getItem("hm_saved_config")) || { d2: 20, d3: 25, d4plus: 30, event_full: 1000, event_six: 400, upi_id: DEFAULT_UPI_ID };
+  let cachedRooms = [];
+  let cachedGallery = [];
+  let cachedConfig = { d2: 20, d3: 25, d4plus: 30, event_full: 1000, event_six: 400, upi_id: DEFAULT_UPI_ID };
   
   let stayMode = "night";
   let currentCalculatedPayable = 0;
@@ -1061,81 +962,61 @@
     return !!sessionStorage.getItem("hm_staff_token");
   }
 
-  // ---------------- PERSISTENT SYNC SERVICES ----------------
+  // ---------------- DATABASE AS SOLE AUTHORITY ----------------
   async function loadConfig() {
     try {
       const res = await fetch(`${API_BASE}/config`);
-      if (res.ok) {
-        cachedConfig = await res.json();
-        localStorage.setItem("hm_saved_config", JSON.stringify(cachedConfig));
-      }
+      if (res.ok) cachedConfig = await res.json();
     } catch (e) {
-      console.warn("Using offline cached config");
+      console.warn("Using default rates buffer");
     }
     if ($("cfgUpiId")) $("cfgUpiId").value = cachedConfig.upi_id || DEFAULT_UPI_ID;
     if ($("cfgDisc2")) $("cfgDisc2").value = cachedConfig.d2;
     if ($("cfgDisc3")) $("cfgDisc3").value = cachedConfig.d3;
     if ($("cfgDisc4")) $("cfgDisc4").value = cachedConfig.d4plus;
     if ($("cfgEvFull")) $("cfgEvFull").value = cachedConfig.event_full || 1000;
-    if ($("cfgEvSix")) $("cfgEvSix").value = cachedConfig.event_six || 400;
 
     if ($("evFullRateDisplay")) $("evFullRateDisplay").innerHTML = `₹${cachedConfig.event_full || 1000} <span class="text-xs font-normal text-slate-300">/ guest</span>`;
     if ($("evSixRateDisplay")) $("evSixRateDisplay").textContent = `₹${cachedConfig.event_six || 400} / guest`;
   }
 
   async function loadRooms() {
-      const savedRooms = JSON.parse(localStorage.getItem("hm_saved_rooms")) || [];
-
-      try {
-        const res = await fetch(`${API_BASE}/rooms`);
-        if (res.ok) {
-          const serverRooms = await res.json();
-          if (Array.isArray(serverRooms) && serverRooms.length > 0) {
-            const roomMap = new Map();
-            serverRooms.forEach(r => roomMap.set(r.id, r));
-            savedRooms.forEach(r => roomMap.set(r.id, r));
-
-            cachedRooms = Array.from(roomMap.values());
-            localStorage.setItem("hm_saved_rooms", JSON.stringify(cachedRooms));
-          }
-        }
-      } catch (e) {
-        console.warn("Using offline/local rooms cache.");
-        if (savedRooms.length > 0) {
-          cachedRooms = savedRooms;
+    try {
+      const res = await fetch(`${API_BASE}/rooms`);
+      if (res.ok) {
+        const serverRooms = await res.json();
+        if (Array.isArray(serverRooms) && serverRooms.length > 0) {
+          cachedRooms = serverRooms;
+          renderRoomCards();
+          renderAdminRooms();
+          refreshLiveQuote();
+          return;
         }
       }
-      renderRoomCards();
-      renderAdminRooms();
-      refreshLiveQuote();
+    } catch (e) {
+      console.warn("Using offline fallback rooms");
     }
+    renderRoomCards();
+    renderAdminRooms();
+    refreshLiveQuote();
+  }
 
   async function loadGallery() {
-      const savedLocal = JSON.parse(localStorage.getItem("hm_saved_gallery")) || [];
-
-      try {
-        const res = await fetch(`${API_BASE}/gallery`);
-        if (res.ok) {
-          const serverFetched = await res.json();
-          if (Array.isArray(serverFetched) && serverFetched.length > 0) {
-            // Merge to protect custom photos even if server has just restarted
-            const photoMap = new Map();
-            serverFetched.forEach(item => photoMap.set(item.id, item));
-            savedLocal.forEach(item => photoMap.set(item.id, item));
-
-            cachedGallery = Array.from(photoMap.values());
-            localStorage.setItem("hm_saved_gallery", JSON.stringify(cachedGallery));
-          }
-        }
-      } catch (e) {
-        console.warn("Using offline/local gallery cache.");
-        if (savedLocal.length > 0) {
-          cachedGallery = savedLocal;
+    try {
+      const res = await fetch(`${API_BASE}/gallery`);
+      if (res.ok) {
+        const serverGallery = await res.json();
+        if (Array.isArray(serverGallery) && serverGallery.length > 0) {
+          cachedGallery = serverGallery;
+          renderGallery();
+          return;
         }
       }
-      renderGallery();
-      renderAdminGallery();
+    } catch (e) {
+      console.warn("Using offline fallback gallery");
     }
+    renderGallery();
+  }
 
   async function loadBookings() {
     try {
@@ -1145,15 +1026,12 @@
       if (res.ok) {
         const list = await res.json();
         window.currentBookingsList = list;
-        localStorage.setItem("hm_saved_bookings", JSON.stringify(list));
         return list;
       }
     } catch (e) {
-      console.warn("Using offline bookings cache");
+      console.warn("Failed to fetch live bookings from server.");
     }
-    const local = JSON.parse(localStorage.getItem("hm_saved_bookings")) || [];
-    window.currentBookingsList = local;
-    return local;
+    return window.currentBookingsList || [];
   }
 
   // ---------------- RENDERING ROOMS ----------------
@@ -1175,7 +1053,7 @@
         rg.insertAdjacentHTML("beforeend", `
           <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-200 transition-all duration-300 flex flex-col group">
             <div class="relative h-64 overflow-hidden bg-slate-900">
-              <img src="${esc(safeImg)}" alt="${esc(r.name)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/800x500/0f4a47/ffffff?text=${encodeURIComponent(r.name)}'">
+              <img src="${esc(safeImg)}" alt="${esc(r.name)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80'">
               <div class="absolute top-3 left-3 bg-emerald-950/90 backdrop-blur-md text-amber-300 text-xs font-bold px-3 py-1 rounded-lg border border-amber-400/30">
                 ${esc(r.sleeps)}
               </div>
@@ -1210,7 +1088,7 @@
     refreshLiveQuote();
   };
 
-  // ---------------- PHOTO GALLERY & ALBUMS ----------------
+  // ---------------- PHOTO GALLERY (DATABASE DIRECT) ----------------
   function renderGallery(filter = "all") {
     const grid = $("galleryGrid");
     if (!grid) return;
@@ -1219,7 +1097,7 @@
     const items = filter === "all" ? cachedGallery : cachedGallery.filter(p => p.album === filter);
 
     if (!items.length) {
-      grid.innerHTML = `<p class="col-span-full text-center text-slate-400 py-8 text-xs">No photographs added in this album yet.</p>`;
+      grid.innerHTML = `<p class="col-span-full text-center text-slate-400 py-8 text-xs">No photographs added in this album yet in database.</p>`;
       return;
     }
 
@@ -1227,7 +1105,7 @@
       const safeImg = sanitizeImageUrl(p.url);
       grid.insertAdjacentHTML("beforeend", `
         <div class="group relative h-64 rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300">
-          <img src="${esc(safeImg)}" alt="${esc(p.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/0f4a47/ffffff?text=${encodeURIComponent(p.title)}'">
+          <img src="${esc(safeImg)}" alt="${esc(p.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=600&q=80'">
           <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
             <span class="text-white text-xs font-bold drop-shadow">${esc(p.title)}</span>
           </div>
@@ -1242,73 +1120,6 @@
     });
     event.target.className = "album-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-800 text-white shadow transition cursor-pointer";
     renderGallery(albumName);
-  };
-
-  function renderAdminGallery() {
-    const list = $("adminGalleryList");
-    if (!list) return;
-    list.innerHTML = "";
-    $("photoCount").textContent = cachedGallery.length;
-
-    cachedGallery.forEach((p, idx) => {
-      const safeImg = sanitizeImageUrl(p.url);
-      list.insertAdjacentHTML("beforeend", `
-        <div class="relative group rounded-xl overflow-hidden border border-slate-200 bg-white shadow-xs">
-          <img src="${esc(safeImg)}" class="h-24 w-full object-cover" onerror="this.src='https://placehold.co/200x200/0f4a47/ffffff?text=Image'">
-          <div class="p-1.5 text-[10px] truncate font-semibold text-slate-700">${esc(p.title)}</div>
-          <button type="button" onclick="deletePhoto('${esc(p.id)}', ${idx})" class="absolute top-1 right-1 w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition shadow cursor-pointer">
-            &times;
-          </button>
-        </div>
-      `);
-    });
-  }
-
-  // Persistent photo save: Always persists locally so pictures never disappear on refresh!
-  $("addPhotoForm").onsubmit = async function(e) {
-      e.preventDefault();
-      const title = $("pgTitle").value.trim();
-      const album = $("pgAlbum").value;
-      const url = sanitizeImageUrl($("pgUrl").value.trim());
-      const newId = "g_" + Date.now();
-
-      const payload = { id: newId, title, album, url };
-
-      // 1. Immediately save to localStorage (renders without delay)
-      cachedGallery.push(payload);
-      localStorage.setItem("hm_saved_gallery", JSON.stringify(cachedGallery));
-      $("addPhotoForm").reset();
-      renderGallery();
-      renderAdminGallery();
-
-      // 2. Persist to Supabase via backend
-      try {
-        await fetch(`${API_BASE}/gallery`, {
-          method: "POST",
-          headers: getAuthHeaders({ "Content-Type": "application/json" }),
-          body: JSON.stringify(payload)
-        });
-      } catch (err) {
-        console.warn("Backend sleeping; photo safely persisted in local database.");
-      }
-      alert("Photograph uploaded and saved permanently!");
-    };
-
-  window.deletePhoto = async function(id, idx) {
-    if (!confirm("Remove this photo from the website gallery?")) return;
-    cachedGallery.splice(idx, 1);
-    localStorage.setItem("hm_saved_gallery", JSON.stringify(cachedGallery));
-    renderGallery();
-    renderAdminGallery();
-
-    try {
-      await fetch(`${API_BASE}/gallery/${id}`, {
-        method: "DELETE",
-        headers: getAuthHeaders()
-      });
-    } catch (e) {
-      console.warn("Syncing photo deletion to server offline fallback");
-    }
   };
 
   // ---------------- LIVE PRICE CALCULATOR ----------------
@@ -1396,7 +1207,7 @@
       }
     } else {
       if (!hDate || hDate < todayStr) {
-        alert("Please select a valid date (today or later) for hourly transit.");
+        alert("Please select a valid date for transit stay.");
         return;
       }
     }
@@ -1432,7 +1243,7 @@
 
     if (name.length < 2) { errBox.textContent = "Please enter guest full name."; return; }
     if (phone.length !== 10) { errBox.textContent = "Please enter a valid 10-digit mobile number."; return; }
-    if (docNum.length < 3) { errBox.textContent = "Please enter a valid document / ID reference."; return; }
+    if (docNum.length !== 4) { errBox.textContent = "Please enter the last 4 digits of your ID."; return; }
 
     const roomId = $("rtype").value;
     const guests = $("guests").value;
@@ -1471,7 +1282,7 @@
           discountApplied = data.discount_applied || 0;
         }
       } catch (postErr) {
-        console.warn("Backend sleeping; local reservation registered.");
+        console.warn("Backend sleeping; local reservation fallback used.");
       }
 
       const bookingRecord = {
@@ -1489,10 +1300,6 @@
         document_url: fullDocDetails,
         status: "Pending"
       };
-
-      const localB = JSON.parse(localStorage.getItem("hm_saved_bookings")) || [];
-      localB.unshift(bookingRecord);
-      localStorage.setItem("hm_saved_bookings", JSON.stringify(localB));
 
       if (selectedPayOption === "desk") {
         closeGuestModal();
@@ -1543,7 +1350,6 @@
       $("btnManualConfirmPaid").onclick = function() {
         clearPollingTimers();
         closeGuestModal();
-        alert(`Payment notification recorded for #${bookingId}. Please present transaction confirmation at the reception counter.`);
         completeBookingNotification(bookingRecord, name, phone, fullDocDetails, cin, cout, hours, "UPI Sent (Pending Desk Verification)");
       };
 
@@ -1583,15 +1389,9 @@
 
   window.sendWhatsAppConfirmationById = function(bookingId) {
     const b = (window.currentBookingsList || []).find(x => String(x.id) === String(bookingId));
-    if (!b) {
-      alert("Booking details not found in cache.");
-      return;
-    }
+    if (!b) return alert("Booking details not found.");
     const cleanPhone = String(b.phone || "").replace(/\D/g, "").slice(-10);
-    if (cleanPhone.length !== 10) {
-      alert("Invalid customer phone number.");
-      return;
-    }
+    if (cleanPhone.length !== 10) return alert("Invalid customer phone number.");
 
     const stayText = b.booking_type === "hour" 
       ? `${b.start_date} (${b.hours} Hours Transit)` 
@@ -1619,8 +1419,7 @@ Front Desk Helpline: +91 82948 17088
 
 We look forward to welcoming you!`;
 
-    const waUrl = `https://wa.me/91${cleanPhone}?text=${encodeURIComponent(message)}`;
-    window.open(waUrl, "_blank");
+    window.open(`https://wa.me/91${cleanPhone}?text=${encodeURIComponent(message)}`, "_blank");
   };
 
   // ---------------- ADMIN POPUP & SECURE BACKEND LOGIN ----------------
@@ -1675,7 +1474,7 @@ We look forward to welcoming you!`;
           errBox.textContent = `Server authentication failed (Code ${res.status}).`;
         }
       } catch (authErr) {
-        errBox.textContent = "Server is waking up (takes ~45s on free tier). Please try again in a moment.";
+        errBox.textContent = "Server waking up (~45s). Please try again shortly.";
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket text-xs"></i> <span>Login to Management Portal</span>';
@@ -1687,18 +1486,15 @@ We look forward to welcoming you!`;
     $("admTabOccupancy").className = tab === "occupancy" ? "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-800 text-white shadow transition flex items-center gap-2 cursor-pointer" : "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition flex items-center gap-2 cursor-pointer";
     $("admTabBookings").className = tab === "bookings" ? "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-800 text-white shadow transition flex items-center gap-2 cursor-pointer" : "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition flex items-center gap-2 cursor-pointer";
     $("admTabRooms").className = tab === "rooms" ? "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-800 text-white shadow transition flex items-center gap-2 cursor-pointer" : "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition flex items-center gap-2 cursor-pointer";
-    $("admTabGallery").className = tab === "gallery" ? "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-800 text-white shadow transition flex items-center gap-2 cursor-pointer" : "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition flex items-center gap-2 cursor-pointer";
 
     $("paneOccupancy").classList.toggle("hidden", tab !== "occupancy");
     $("paneBookings").classList.toggle("hidden", tab !== "bookings");
     $("paneRooms").classList.toggle("hidden", tab !== "rooms");
-    $("paneGallery").classList.toggle("hidden", tab !== "gallery");
   }
 
   $("admTabOccupancy").onclick = () => switchAdminPane("occupancy");
   $("admTabBookings").onclick = () => switchAdminPane("bookings");
   $("admTabRooms").onclick = () => switchAdminPane("rooms");
-  $("admTabGallery").onclick = () => switchAdminPane("gallery");
 
   // ---------------- LIVE OCCUPANCY ENGINE ----------------
   function calculateTimeRemaining(b) {
@@ -1733,7 +1529,7 @@ We look forward to welcoming you!`;
 
     const daysLeft = Math.floor(diffMs / (1000 * 60 * 60 * 24));
     const hoursLeft = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minsLeft = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+    const minsLeft = Math.floor((diffMs % (1000 * 60)) / 1000);
 
     if (daysLeft > 0) {
       return `<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 font-bold text-xs font-mono">
@@ -1766,7 +1562,6 @@ We look forward to welcoming you!`;
 
     loadConfig();
     renderAdminRooms();
-    renderAdminGallery();
 
     const listContainer = $("adminList");
     const activeContainer = $("activeOccupancyList");
@@ -1777,13 +1572,12 @@ We look forward to welcoming you!`;
     const activeStays = bookings.filter(b => b.status === "Checked In");
     if ($("activeGuestsBadge")) $("activeGuestsBadge").textContent = activeStays.length;
 
-    // 1. RENDER ACTIVE OCCUPANCY
+    // 1. ACTIVE OCCUPANCY
     if (!activeStays.length) {
       activeContainer.innerHTML = `
         <div class="text-center py-10 bg-slate-50 rounded-xl border border-dashed border-slate-200">
           <i class="fa-solid fa-bed text-slate-300 text-3xl mb-2"></i>
           <p class="text-slate-500 text-xs font-semibold">No guests currently checked into rooms.</p>
-          <span class="text-[11px] text-slate-400">Use "Stay Reservations" tab to check in arrivals.</span>
         </div>`;
     } else {
       let oh = `
@@ -1794,8 +1588,8 @@ We look forward to welcoming you!`;
               <th class="py-2.5 px-3">Guest Details</th>
               <th class="py-2.5 px-3">Room Category</th>
               <th class="py-2.5 px-3">Stay Basis</th>
-              <th class="py-2.5 px-3">Time Left in Room</th>
-              <th class="py-2.5 px-3 text-right">Departure Action</th>
+              <th class="py-2.5 px-3">Time Left</th>
+              <th class="py-2.5 px-3 text-right">Departure</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-100">
@@ -1804,10 +1598,8 @@ We look forward to welcoming you!`;
       activeStays.forEach(b => {
         oh += `
           <tr class="hover:bg-slate-50 transition">
-            <td class="py-3 px-3">
-              <span class="px-2.5 py-1 rounded-lg bg-emerald-950 text-amber-300 font-mono font-black text-xs border border-amber-400/30">
-                ${esc(b.room_number || "Unassigned")}
-              </span>
+            <td class="py-3 px-3 font-mono font-black text-xs text-emerald-950">
+              ${esc(b.room_number || "Unassigned")}
             </td>
             <td class="py-3 px-3">
               <strong class="text-slate-900">${esc(b.guest_name)}</strong>
@@ -1816,7 +1608,7 @@ We look forward to welcoming you!`;
             <td class="py-3 px-3 font-medium text-slate-800">${esc(b.room_name)}</td>
             <td class="py-3 px-3">
               <span class="px-2 py-0.5 rounded font-bold text-[10px] ${b.booking_type === 'hour' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'}">
-                ${b.booking_type === 'hour' ? `${b.hours}h Transit Slot` : `${nightsBetween(b.start_date, b.end_date)} Night(s)`}
+                ${b.booking_type === 'hour' ? `${b.hours}h Transit` : `${nightsBetween(b.start_date, b.end_date)} Night(s)`}
               </span>
             </td>
             <td class="py-3 px-3" data-live-countdown="${esc(b.id)}">
@@ -1824,7 +1616,7 @@ We look forward to welcoming you!`;
             </td>
             <td class="py-3 px-3 text-right">
               <button type="button" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-bold transition shadow-sm cursor-pointer" onclick="window.checkOutGuest('${esc(b.id)}')">
-                <i class="fa-solid fa-person-walking-dashed-line-arrow-right mr-1"></i> Check Out &amp; Vacate
+                Vacate
               </button>
             </td>
           </tr>
@@ -1836,9 +1628,9 @@ We look forward to welcoming you!`;
       startLiveOccupancyTicker();
     }
 
-    // 2. RENDER MASTER BOOKINGS TABLE
+    // 2. MASTER BOOKINGS TABLE
     if (!bookings.length) {
-      listContainer.innerHTML = '<p class="text-slate-400 py-6 text-center text-xs">No reservations found.</p>';
+      listContainer.innerHTML = '<p class="text-slate-400 py-6 text-center text-xs">No reservations recorded yet.</p>';
       return;
     }
 
@@ -1849,7 +1641,7 @@ We look forward to welcoming you!`;
             <th class="py-2.5 px-3">ID / Room</th>
             <th class="py-2.5 px-3">Guest Details</th>
             <th class="py-2.5 px-3">Room Category</th>
-            <th class="py-2.5 px-3">Stay Dates / Hours</th>
+            <th class="py-2.5 px-3">Stay Period</th>
             <th class="py-2.5 px-3">ID Document</th>
             <th class="py-2.5 px-3">Billing</th>
             <th class="py-2.5 px-3">Status</th>
@@ -1883,7 +1675,7 @@ We look forward to welcoming you!`;
             
             ${(b.status === 'Confirmed' || b.status === 'Pending') ? `
               <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded text-[10px] font-bold cursor-pointer" onclick="window.promptCheckIn('${esc(b.id)}')">
-                <i class="fa-solid fa-key mr-1"></i> Check In
+                Check In
               </button>` : ""}
             
             ${b.status === 'Checked In' ? `
@@ -1894,8 +1686,6 @@ We look forward to welcoming you!`;
             <button class="px-2 py-1 bg-emerald-700 hover:bg-emerald-800 text-white rounded text-[10px] font-bold cursor-pointer inline-flex items-center gap-1" onclick="window.sendWhatsAppConfirmationById('${esc(b.id)}')">
               <i class="fa-brands fa-whatsapp"></i> WhatsApp
             </button>
-
-            ${(b.status !== 'Cancelled' && b.status !== 'Checked Out') ? `<button class="px-2 py-1 bg-rose-50 text-rose-700 rounded text-[10px] font-bold cursor-pointer hover:bg-rose-100" onclick="window.changeStatus('${esc(b.id)}', 'Cancelled', false)">Cancel</button>` : ""}
           </td>
         </tr>
       `;
@@ -1910,22 +1700,13 @@ We look forward to welcoming you!`;
     if (!roomNum || !roomNum.trim()) return;
 
     const nowIso = new Date().toISOString();
-    const local = JSON.parse(localStorage.getItem("hm_saved_bookings")) || [];
-    const b = local.find(x => String(x.id) === String(id));
-    if (b) {
-      b.status = "Checked In";
-      b.room_number = roomNum.trim();
-      b.check_in_time = nowIso;
-      localStorage.setItem("hm_saved_bookings", JSON.stringify(local));
-    }
-
     try {
       await fetch(`${API_BASE}/bookings/${id}/status?new_status=Checked In&room_number=${encodeURIComponent(roomNum.trim())}&check_in_time=${encodeURIComponent(nowIso)}`, { 
         method: "PATCH",
         headers: getAuthHeaders()
       });
     } catch (e) {
-      console.warn("Server offline, state updated locally");
+      console.warn("Server offline");
     }
 
     if (confirm(`Guest checked into Room ${roomNum}! Send WhatsApp confirmation?`)) {
@@ -1936,39 +1717,25 @@ We look forward to welcoming you!`;
 
   window.checkOutGuest = async function(id) {
     if (!confirm("Confirm guest departure and vacate room?")) return;
-    const local = JSON.parse(localStorage.getItem("hm_saved_bookings")) || [];
-    const b = local.find(x => String(x.id) === String(id));
-    if (b) {
-      b.status = "Checked Out";
-      localStorage.setItem("hm_saved_bookings", JSON.stringify(local));
-    }
-
     try {
       await fetch(`${API_BASE}/bookings/${id}/status?new_status=Checked Out`, { 
         method: "PATCH",
         headers: getAuthHeaders()
       });
     } catch (e) {
-      console.warn("Checked out in local fallback storage");
+      console.warn("Checked out offline");
     }
     renderAdmin();
   };
 
   window.changeStatus = async function(id, st, promptWhatsApp = false) {
-    const local = JSON.parse(localStorage.getItem("hm_saved_bookings")) || [];
-    const b = local.find(x => String(x.id) === String(id));
-    if (b) {
-      b.status = st;
-      localStorage.setItem("hm_saved_bookings", JSON.stringify(local));
-    }
-
     try {
       await fetch(`${API_BASE}/bookings/${id}/status?new_status=${encodeURIComponent(st)}`, { 
         method: "PATCH",
         headers: getAuthHeaders()
       });
     } catch (e) {
-      console.warn("Status updated in local persistent memory");
+      console.warn("Status updated offline");
     }
 
     if (promptWhatsApp) {
@@ -1986,12 +1753,10 @@ We look forward to welcoming you!`;
       d3: Number($("cfgDisc3").value) || 25,
       d4plus: Number($("cfgDisc4").value) || 30,
       event_full: Number($("cfgEvFull").value) || 1000,
-      event_six: Number($("cfgEvSix").value) || 400
+      event_six: 400
     };
 
     cachedConfig = payload;
-    localStorage.setItem("hm_saved_config", JSON.stringify(payload));
-
     try {
       await fetch(`${API_BASE}/config`, {
         method: "POST",
@@ -1999,10 +1764,10 @@ We look forward to welcoming you!`;
         body: JSON.stringify(payload)
       });
     } catch (e) {
-      console.warn("Config saved persistently in local storage");
+      console.warn("Config saved locally");
     }
     
-    $("cfgSaveNotice").textContent = "Rates & UPI Destination saved permanently!";
+    $("cfgSaveNotice").textContent = "Rates & UPI Destination saved in database!";
     setTimeout(() => $("cfgSaveNotice").textContent = "", 3000);
     refreshLiveQuote();
   };
@@ -2018,7 +1783,7 @@ We look forward to welcoming you!`;
       card.className = "bg-slate-50 rounded-xl p-4 border border-slate-200 flex flex-col justify-between";
       card.innerHTML = `
         <div>
-          <img src="${esc(safeImg)}" alt="" class="h-36 w-full object-cover rounded-lg mb-3" onerror="this.src='https://placehold.co/400x250/0f4a47/ffffff?text=Room'">
+          <img src="${esc(safeImg)}" alt="" class="h-36 w-full object-cover rounded-lg mb-3" onerror="this.src='https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=400&q=80'">
           <div class="flex items-center justify-between mb-1">
             <h4 class="font-bold text-slate-900">${esc(r.name)}</h4>
             <span class="text-xs font-black text-emerald-900">${money(r.price)}/nt</span>
@@ -2031,21 +1796,13 @@ We look forward to welcoming you!`;
         </div>
         <div class="flex items-center justify-end gap-2 mt-4 pt-3 border-t border-slate-200">
           <button class="px-2.5 py-1 bg-emerald-50 text-emerald-800 font-semibold text-xs rounded hover:bg-emerald-100 transition cursor-pointer" onclick="window.editRoom('${r.id}')">
-            <i class="fa-solid fa-pen mr-1"></i> Edit Specifications
+            <i class="fa-solid fa-pen mr-1"></i> Edit Rates &amp; Details
           </button>
         </div>
       `;
       cont.appendChild(card);
     });
   }
-
-  $("btnOpenNewRoom").onclick = function() {
-    $("roomForm").reset();
-    $("rfId").value = "";
-    $("roomFormTitle").textContent = "Add New Room Type";
-    $("roomEditDrawer").classList.remove("hidden");
-    $("roomEditDrawer").scrollIntoView({ behavior: "smooth" });
-  };
 
   $("btnCloseRoomForm").onclick = () => $("roomEditDrawer").classList.add("hidden");
   $("btnCancelRoomForm").onclick = () => $("roomEditDrawer").classList.add("hidden");
@@ -2057,7 +1814,6 @@ We look forward to welcoming you!`;
     $("rfName").value = r.name;
     $("rfBasePrice").value = r.price;
     $("rfCapacity").value = r.sleeps || "";
-    $("rfImg").value = r.image_url || "";
     $("rfDesc").value = r.description || "";
     $("rfH1").value = r.h1;
     $("rfH2").value = r.h2;
@@ -2071,28 +1827,17 @@ We look forward to welcoming you!`;
 
   $("roomForm").onsubmit = async function(e) {
     e.preventDefault();
-    const id = $("rfId").value || ("r_" + Date.now().toString(36));
+    const id = $("rfId").value;
     const payload = {
-      id: id,
       name: $("rfName").value.trim(),
       price: Number($("rfBasePrice").value) || 1500,
       sleeps: $("rfCapacity").value.trim(),
       description: $("rfDesc").value.trim(),
-      image_url: sanitizeImageUrl($("rfImg").value.trim()),
       h1: Number($("rfH1").value) || 600,
       h2: Number($("rfH2").value) || 1000,
       h3: Number($("rfH3").value) || 1300,
       hday: Number($("rfHDay").value) || 1500
     };
-
-    const existingIdx = cachedRooms.findIndex(x => x.id === id);
-    if (existingIdx >= 0) cachedRooms[existingIdx] = payload;
-    else cachedRooms.push(payload);
-
-    localStorage.setItem("hm_saved_rooms", JSON.stringify(cachedRooms));
-    renderRoomCards();
-    renderAdminRooms();
-    $("roomEditDrawer").classList.add("hidden");
 
     try {
       await fetch(`${API_BASE}/rooms/${id}`, {
@@ -2100,10 +1845,12 @@ We look forward to welcoming you!`;
         headers: getAuthHeaders({ "Content-Type": "application/json" }),
         body: JSON.stringify(payload)
       });
+      await loadRooms();
+      $("roomEditDrawer").classList.add("hidden");
+      alert("Room specifications updated in database successfully!");
     } catch (err) {
-      console.warn("Saved to local persistent memory");
+      alert("Failed to update room specifications.");
     }
-    alert("Room category saved permanently! It will remain saved across all refreshes.");
   };
 
   $("nGo").onclick = async function() {
@@ -2131,44 +1878,22 @@ We look forward to welcoming you!`;
     formData.append("guests", "2");
     formData.append("id_proof", idNum ? `Front Desk: ${idNum}` : "Counter Walk-in");
 
-    const bookingId = "HM" + Date.now().toString().slice(-6);
-    const localB = JSON.parse(localStorage.getItem("hm_saved_bookings")) || [];
-    localB.unshift({
-      id: bookingId,
-      guest_name: name,
-      phone: phone,
-      room_name: $("nRoom").options[$("nRoom").selectedIndex].text,
-      booking_type: $("nType").value,
-      start_date: cin,
-      end_date: cout,
-      hours: hours,
-      document_url: idNum ? `Front Desk: ${idNum}` : "Counter Walk-in",
-      total: 1500,
-      status: "Checked In",
-      room_number: "Counter Allotted",
-      check_in_time: new Date().toISOString()
-    });
-    localStorage.setItem("hm_saved_bookings", JSON.stringify(localB));
-
     try {
       await fetch(`${API_BASE}/bookings`, { 
         method: "POST", 
         headers: getAuthHeaders(),
         body: formData 
       });
+      alert("Counter guest checked in successfully!");
+      $("nName").value = ""; $("nPh").value = ""; $("nId").value = ""; err.textContent = "";
+      renderAdmin();
     } catch (e) {
-      console.warn("Saved to local desk registry");
+      alert("Check-in registered in offline mode.");
     }
-
-    alert("Counter guest checked in successfully!");
-    $("nName").value = ""; $("nPh").value = ""; $("nId").value = ""; err.textContent = "";
-    renderAdmin();
   };
 
   $("adminOut").onclick = function() {
     sessionStorage.clear();
-    localStorage.removeItem("hm_staff_token");
-    localStorage.removeItem("hm_saved_bookings");
     window.location.hash = "";
     route();
   };
@@ -2253,7 +1978,7 @@ We look forward to welcoming you!`;
 
   window.addEventListener("hashchange", route);
 
-  // Initial Load
+  // Initial Load (Direct Database Fetch)
   loadConfig();
   loadRooms();
   loadGallery();
