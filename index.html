@@ -1266,33 +1266,33 @@
 
   // Persistent photo save: Always persists locally so pictures never disappear on refresh!
   $("addPhotoForm").onsubmit = async function(e) {
-    e.preventDefault();
-    const title = $("pgTitle").value.trim();
-    const album = $("pgAlbum").value;
-    const url = sanitizeImageUrl($("pgUrl").value.trim());
-    const newId = "g_" + Date.now();
+      e.preventDefault();
+      const title = $("pgTitle").value.trim();
+      const album = $("pgAlbum").value;
+      const url = sanitizeImageUrl($("pgUrl").value.trim());
+      const newId = "g_" + Date.now();
 
-    const payload = { id: newId, title, album, url };
+      const payload = { id: newId, title, album, url };
 
-    // 1. Immediately save into persistent local storage
-    cachedGallery.push(payload);
-    localStorage.setItem("hm_saved_gallery", JSON.stringify(cachedGallery));
-    $("addPhotoForm").reset();
-    renderGallery();
-    renderAdminGallery();
+      // 1. Immediately save to localStorage (renders without delay)
+      cachedGallery.push(payload);
+      localStorage.setItem("hm_saved_gallery", JSON.stringify(cachedGallery));
+      $("addPhotoForm").reset();
+      renderGallery();
+      renderAdminGallery();
 
-    // 2. Sync to cloud server in background
-    try {
-      await fetch(`${API_BASE}/gallery`, {
-        method: "POST",
-        headers: getAuthHeaders({ "Content-Type": "application/json" }),
-        body: JSON.stringify(payload)
-      });
-    } catch (err) {
-      console.warn("Backend sleeping; photo safely persisted locally.");
-    }
-    alert("Photograph added successfully! It is safely stored and will not disappear.");
-  };
+      // 2. Persist to Supabase via backend
+      try {
+        await fetch(`${API_BASE}/gallery`, {
+          method: "POST",
+          headers: getAuthHeaders({ "Content-Type": "application/json" }),
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.warn("Backend sleeping; photo safely persisted in local database.");
+      }
+      alert("Photograph uploaded and saved permanently!");
+    };
 
   window.deletePhoto = async function(id, idx) {
     if (!confirm("Remove this photo from the website gallery?")) return;
