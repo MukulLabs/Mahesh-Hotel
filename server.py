@@ -206,10 +206,17 @@ class RoomRatesPayload(BaseModel):
 # ==========================================
 from fastapi.responses import PlainTextResponse
 
-# Minimal 2-character response: consumes 2 bytes, never exceeds size limits
 @app.get("/api/health", response_class=PlainTextResponse)
 @app.head("/api/health")
 def health():
+    # Lightweight ping to Supabase to break the 7-day inactivity pause
+    if supabase_client:
+        try:
+            # Fetches just 1 field from 1 row (takes ~5 ms, uses practically 0 data)
+            supabase_client.table("hotel_config").select("id").limit(1).execute()
+        except Exception as e:
+            print(f"Health DB ping warning: {e}")
+            
     return "ok"
 
 # Rate-limited login (Max 5 attempts per minute)
