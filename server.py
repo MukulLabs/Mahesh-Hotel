@@ -13,7 +13,7 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
-# Optional Supabase client (if installed and configured)
+# Supabase Client Import
 try:
     from supabase import create_client, Client
 except ImportError:
@@ -25,10 +25,10 @@ except ImportError:
 # ==========================================
 limiter = Limiter(key_func=get_remote_address)
 
-# Disabled auto-generated docs in production to prevent schema scraping
+# Disable auto-generated docs in production to prevent schema scraping
 app = FastAPI(
     title="Hotel Mahesh API",
-    version="2.1.0",
+    version="2.2.0",
     docs_url=None,
     redoc_url=None,
     openapi_url=None
@@ -41,6 +41,8 @@ ALLOWED_ORIGINS = [
     "https://mukullabs.github.io",
     "https://hotelmahesh.com",
     "https://www.hotelmahesh.com",
+    "https://hotelmahesh.in",
+    "https://www.hotelmahesh.in",
     "http://localhost:5500",
     "http://127.0.0.1:5500",
 ]
@@ -54,7 +56,7 @@ app.add_middleware(
 )
 
 # ==========================================
-# 2. CREDENTIALS & PERSISTENCE
+# 2. CREDENTIALS & SUPABASE INITIALIZATION
 # ==========================================
 ADMIN_USERNAME = os.getenv("HOTEL_ADMIN_USER", "admin")
 ADMIN_PASSWORD = os.getenv("HOTEL_ADMIN_PASS", "mahesh@123")
@@ -67,11 +69,13 @@ supabase_client: Optional[Client] = None
 if create_client and SUPABASE_URL and SUPABASE_KEY:
     try:
         supabase_client = create_client(SUPABASE_URL, SUPABASE_KEY)
+        print("Connected to Supabase successfully.")
     except Exception as e:
         print(f"Warning: Failed to connect to Supabase: {e}")
 
-# In-Memory Fallback State (operational buffer)
+# In-Memory Default State
 state_config = {
+    "id": "global_config",
     "upi_id": "hotelmahesh@upi",
     "d2": 20,
     "d3": 25,
@@ -220,49 +224,107 @@ def login(request: Request, payload: LoginRequest):
     token = generate_token(payload.username)
     return {"token": token, "status": "authenticated"}
 
+# --- CONFIG (Persisted in Supabase) ---
 @app.get("/api/config")
 def get_config():
+    if supabase_client:
+        try:
+            res = supabase_client.table("hotel_config").select("*").eq("id", "global_config").execute()
+            if res.data and len(res.data) > 0:
+                return res.data[0]
+        except Exception as e:
+            print(f"Supabase config read error: {e}")
     return state_config
 
 @app.post("/api/config")
 def save_config(payload: ConfigPayload, user: str = Depends(verify_admin_token)):
     global state_config
-    state_config = payload.dict()
+    data = payload.dict()
+    data["id"] = "global_config"
+    state_config = data
+    if supabase_client:
+        try:
+            supabase_client.table("hotel_config").upsert(data).execute()
+        except Exception as e:
+            print(f"Supabase config save error: {e}")
     return {"status": "success", "config": state_config}
 
+# --- ROOMS (Persisted in Supabase) ---
 @app.get("/api/rooms")
 def get_rooms():
+    if supabase_client:
+        try:
+            res = supabase_client.table("rooms").select("*").execute()
+            if res.data and len(res.data) > 0:
+                return res.data
+        except Exception as e:
+            print(f"Supabase rooms read error: {e}")
     return state_rooms
 
 @app.post("/api/rooms/{room_id}")
 def save_room(room_id: str, payload: RoomPayload, user: str = Depends(verify_admin_token)):
+    new_data = payload.dict()
+    new_data["id"] = room_id
+
+    # Update in-memory fallback
+    found = False
     for idx, r in enumerate(state_rooms):
         if r["id"] == room_id:
-            updated = payload.dict()
-            updated["id"] = room_id
-            state_rooms[idx] = updated
-            return {"status": "updated", "room": updated}
-    
-    new_r = payload.dict()
-    new_r["id"] = room_id
-    state_rooms.append(new_r)
-    return {"status": "created", "room": new_r}
+            state_rooms[idx] = new_data
+            found = True
+            break
+    if not found:
+        state_rooms.append(new_data)
 
+    # Persist permanently to Supabase
+    if supabase_client:
+        try:
+            supabase_client.table("rooms").upsert(new_data).execute()
+        except Exception as e:
+            print(f"Supabase room save error: {e}")
+
+    return {"status": "saved", "room": new_data}
+
+# --- GALLERY (Persisted in Supabase) ---
 @app.get("/api/gallery")
 def get_gallery():
+    if supabase_client:
+        try:
+            res = supabase_client.table("gallery").select("*").order("created_at", desc=False).execute()
+            if res.data and len(res.data) > 0:
+                return res.data
+        except Exception as e:
+            print(f"Supabase gallery read error: {e}")
     return state_gallery
 
 @app.post("/api/gallery")
 def add_gallery_item(payload: GalleryPayload, user: str = Depends(verify_admin_token)):
-    state_gallery.append(payload.dict())
-    return {"status": "success", "item": payload}
+    item = payload.dict()
+    item["created_at"] = datetime.utcnow().isoformat()
+    state_gallery.append(item)
+
+    if supabase_client:
+        try:
+            supabase_client.table("gallery").upsert(item).execute()
+        except Exception as e:
+            print(f"Supabase gallery save error: {e}")
+
+    return {"status": "success", "item": item}
 
 @app.delete("/api/gallery/{item_id}")
 def delete_gallery_item(item_id: str, user: str = Depends(verify_admin_token)):
     global state_gallery
     state_gallery = [g for g in state_gallery if g["id"] != item_id]
+
+    if supabase_client:
+        try:
+            supabase_client.table("gallery").delete().eq("id", item_id).execute()
+        except Exception as e:
+            print(f"Supabase gallery delete error: {e}")
+
     return {"status": "deleted"}
 
+# --- BOOKINGS (Persisted in Supabase) ---
 @app.get("/api/bookings")
 def get_bookings(user: str = Depends(verify_admin_token)):
     if supabase_client:
@@ -316,8 +378,6 @@ def create_booking(
         total = round(base * (1 - (discount_pct / 100)))
 
     booking_id = f"HM{int(datetime.utcnow().timestamp())}"
-    
-    # Store masked version of government ID
     safe_document_ref = sanitize_id_proof(id_proof)
 
     new_booking = {
