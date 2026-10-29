@@ -25,10 +25,10 @@ except ImportError:
 # ==========================================
 limiter = Limiter(key_func=get_remote_address)
 
-# Disable auto-generated docs in production to prevent schema scraping
+# Disabled auto-generated docs in production to prevent schema scraping
 app = FastAPI(
     title="Hotel Mahesh API",
-    version="2.2.0",
+    version="2.3.0",
     docs_url=None,
     redoc_url=None,
     openapi_url=None
@@ -36,7 +36,7 @@ app = FastAPI(
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# Strict CORS: only allow requests from your actual frontend sites
+# Strict CORS: only allow authorized frontend domains
 ALLOWED_ORIGINS = [
     "https://mukullabs.github.io",
     "https://hotelmahesh.com",
@@ -73,7 +73,7 @@ if create_client and SUPABASE_URL and SUPABASE_KEY:
     except Exception as e:
         print(f"Warning: Failed to connect to Supabase: {e}")
 
-# In-Memory Default State
+# In-Memory Default State (fallback buffer)
 state_config = {
     "id": "global_config",
     "upi_id": "hotelmahesh@upi",
@@ -91,7 +91,7 @@ state_rooms = [
         "price": 2200,
         "sleeps": "Sleeps 2 Guests · 1 King Bed",
         "description": "Air-conditioned premium suite featuring smart TV, ambient panel lighting, and marble en-suite bathroom.",
-        "image_url": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80",
+        "image_url": "https://i.ibb.co/bMSbr9QM/Whats-App-Image-2026-10-27-at-19-21-40-3.jpg",
         "h1": 600, "h2": 1000, "h3": 1300, "hday": 1500
     },
     {
@@ -100,7 +100,7 @@ state_rooms = [
         "price": 3500,
         "sleeps": "Sleeps 4 to 5 Guests · 2 Queen Beds",
         "description": "Spacious dual double-bed family accommodation with high ceilings, full cooling, and luggage wardrobe.",
-        "image_url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80",
+        "image_url": "https://i.ibb.co/gb3bvk0M/Whats-App-Image-2026-10-27-at-19-21-40-1.jpg",
         "h1": 1000, "h2": 1800, "h3": 2400, "hday": 3000
     },
     {
@@ -109,18 +109,22 @@ state_rooms = [
         "price": 1400,
         "sleeps": "Sleeps 2 Guests · 1 Double Bed",
         "description": "Clean, budget-conscious transit room with ceiling fan, writing table, and hot water shower.",
-        "image_url": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80",
+        "image_url": "https://i.ibb.co/fdzW1t3j/Whats-App-Image-2026-10-27-at-19-21-40.jpg",
         "h1": 400, "h2": 700, "h3": 900, "hday": 1200
     }
 ]
 
 state_gallery = [
-    {"id": "g1", "album": "rooms", "title": "Deluxe Suite Bed", "url": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80"},
-    {"id": "g2", "album": "rooms", "title": "Family Room Interior", "url": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80"},
-    {"id": "g3", "album": "banquets", "title": "Grand Wedding Mandap", "url": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80"},
-    {"id": "g4", "album": "banquets", "title": "Reception Dining Hall", "url": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80"},
-    {"id": "g5", "album": "premises", "title": "Hotel Reception & Desk", "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80"},
-    {"id": "g6", "album": "premises", "title": "Exterior Night Lighting", "url": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80"}
+    {"id": "g_1", "album": "rooms", "title": "Executive Room Interior", "url": "https://i.ibb.co/bMSbr9QM/Whats-App-Image-2026-10-27-at-19-21-40-3.jpg"},
+    {"id": "g_2", "album": "rooms", "title": "Deluxe AC Room Bedding", "url": "https://i.ibb.co/tpbTddBH/Whats-App-Image-2026-10-27-at-19-21-40-2.jpg"},
+    {"id": "g_3", "album": "rooms", "title": "Family Suite Luxury Setup", "url": "https://i.ibb.co/gb3bvk0M/Whats-App-Image-2026-10-27-at-19-21-40-1.jpg"},
+    {"id": "g_4", "album": "rooms", "title": "Standard Room Bedding", "url": "https://i.ibb.co/fdzW1t3j/Whats-App-Image-2026-10-27-at-19-21-40.jpg"},
+    {"id": "g_5", "album": "premises", "title": "Corridor & Reception Desk", "url": "https://i.ibb.co/kgsSKf4n/Whats-App-Image-2026-10-27-at-19-21-39-2.jpg"},
+    {"id": "g_6", "album": "premises", "title": "Main Building Entrance", "url": "https://i.ibb.co/MDZv48NY/Whats-App-Image-2026-10-27-at-19-21-39-1.jpg"},
+    {"id": "g_7", "album": "banquets", "title": "Banquet Hall Stage Area", "url": "https://i.ibb.co/wZwzHKgD/Whats-App-Image-2026-10-27-at-19-21-39.jpg"},
+    {"id": "g_8", "album": "banquets", "title": "Event Dining Arrangement", "url": "https://i.ibb.co/YF1tbmc4/Whats-App-Image-2026-10-27-at-19-21-38-2.jpg"},
+    {"id": "g_9", "album": "premises", "title": "Hotel Mahesh Exterior Facade", "url": "https://i.ibb.co/bRFQsxcz/Whats-App-Image-2026-10-27-at-19-21-38-1.jpg"},
+    {"id": "g_10", "album": "premises", "title": "Evening Property Lighting", "url": "https://i.ibb.co/sdZZrnSR/Whats-App-Image-2026-10-27-at-19-21-38.jpg"}
 ]
 
 state_bookings: List[Dict[str, Any]] = []
@@ -187,22 +191,15 @@ class ConfigPayload(BaseModel):
     event_full: int
     event_six: int
 
-class RoomPayload(BaseModel):
+class RoomRatesPayload(BaseModel):
     name: str
     price: int
     sleeps: str
     description: str
-    image_url: str
     h1: int
     h2: int
     h3: int
     hday: int
-
-class GalleryPayload(BaseModel):
-    id: str
-    album: str
-    title: str
-    url: str
 
 # ==========================================
 # 5. API ENDPOINTS
@@ -211,7 +208,7 @@ class GalleryPayload(BaseModel):
 def health():
     return {"status": "ok", "time": datetime.utcnow().isoformat()}
 
-# Rate-limited login: Max 5 attempts per minute to mitigate brute-force attacks
+# Rate-limited login (Max 5 attempts per minute)
 @app.post("/api/auth/login")
 @limiter.limit("5/minute")
 def login(request: Request, payload: LoginRequest):
@@ -224,7 +221,7 @@ def login(request: Request, payload: LoginRequest):
     token = generate_token(payload.username)
     return {"token": token, "status": "authenticated"}
 
-# --- CONFIG (Persisted in Supabase) ---
+# --- CONFIG (Supabase Database Persisted) ---
 @app.get("/api/config")
 def get_config():
     if supabase_client:
@@ -249,7 +246,7 @@ def save_config(payload: ConfigPayload, user: str = Depends(verify_admin_token))
             print(f"Supabase config save error: {e}")
     return {"status": "success", "config": state_config}
 
-# --- ROOMS (Persisted in Supabase) ---
+# --- ROOMS (Supabase Database Persisted) ---
 @app.get("/api/rooms")
 def get_rooms():
     if supabase_client:
@@ -262,32 +259,51 @@ def get_rooms():
     return state_rooms
 
 @app.post("/api/rooms/{room_id}")
-def save_room(room_id: str, payload: RoomPayload, user: str = Depends(verify_admin_token)):
-    new_data = payload.dict()
-    new_data["id"] = room_id
+def update_room_specifications(room_id: str, payload: RoomRatesPayload, user: str = Depends(verify_admin_token)):
+    """Allows staff to edit rates, names, and descriptions while keeping the image managed in the database."""
+    existing_img = "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80"
+    
+    # Preserve existing database image URL
+    if supabase_client:
+        try:
+            res = supabase_client.table("rooms").select("image_url").eq("id", room_id).execute()
+            if res.data and len(res.data) > 0:
+                existing_img = res.data[0].get("image_url", existing_img)
+        except Exception as e:
+            print(f"Supabase check image error: {e}")
+    else:
+        for r in state_rooms:
+            if r["id"] == room_id:
+                existing_img = r.get("image_url", existing_img)
+                break
 
-    # Update in-memory fallback
+    data = payload.dict()
+    data["id"] = room_id
+    data["image_url"] = existing_img
+
+    # Update memory
     found = False
     for idx, r in enumerate(state_rooms):
         if r["id"] == room_id:
-            state_rooms[idx] = new_data
+            state_rooms[idx] = data
             found = True
             break
     if not found:
-        state_rooms.append(new_data)
+        state_rooms.append(data)
 
-    # Persist permanently to Supabase
+    # Persist to Supabase
     if supabase_client:
         try:
-            supabase_client.table("rooms").upsert(new_data).execute()
+            supabase_client.table("rooms").upsert(data).execute()
         except Exception as e:
             print(f"Supabase room save error: {e}")
 
-    return {"status": "saved", "room": new_data}
+    return {"status": "saved", "room": data}
 
-# --- GALLERY (Persisted in Supabase) ---
+# --- GALLERY (Read-Only from Database API) ---
 @app.get("/api/gallery")
 def get_gallery():
+    """Returns photos stored in the Supabase 'gallery' table."""
     if supabase_client:
         try:
             res = supabase_client.table("gallery").select("*").order("created_at", desc=False).execute()
@@ -297,34 +313,7 @@ def get_gallery():
             print(f"Supabase gallery read error: {e}")
     return state_gallery
 
-@app.post("/api/gallery")
-def add_gallery_item(payload: GalleryPayload, user: str = Depends(verify_admin_token)):
-    item = payload.dict()
-    item["created_at"] = datetime.utcnow().isoformat()
-    state_gallery.append(item)
-
-    if supabase_client:
-        try:
-            supabase_client.table("gallery").upsert(item).execute()
-        except Exception as e:
-            print(f"Supabase gallery save error: {e}")
-
-    return {"status": "success", "item": item}
-
-@app.delete("/api/gallery/{item_id}")
-def delete_gallery_item(item_id: str, user: str = Depends(verify_admin_token)):
-    global state_gallery
-    state_gallery = [g for g in state_gallery if g["id"] != item_id]
-
-    if supabase_client:
-        try:
-            supabase_client.table("gallery").delete().eq("id", item_id).execute()
-        except Exception as e:
-            print(f"Supabase gallery delete error: {e}")
-
-    return {"status": "deleted"}
-
-# --- BOOKINGS (Persisted in Supabase) ---
+# --- BOOKINGS (Supabase Database Persisted) ---
 @app.get("/api/bookings")
 def get_bookings(user: str = Depends(verify_admin_token)):
     if supabase_client:
