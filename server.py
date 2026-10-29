@@ -204,9 +204,13 @@ class RoomRatesPayload(BaseModel):
 # ==========================================
 # 5. API ENDPOINTS
 # ==========================================
-@app.get("/api/health")
+from fastapi.responses import PlainTextResponse
+
+# Minimal 2-character response: consumes 2 bytes, never exceeds size limits
+@app.get("/api/health", response_class=PlainTextResponse)
+@app.head("/api/health")
 def health():
-    return {"status": "ok", "time": datetime.utcnow().isoformat()}
+    return "ok"
 
 # Rate-limited login (Max 5 attempts per minute)
 @app.post("/api/auth/login")
