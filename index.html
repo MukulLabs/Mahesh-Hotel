@@ -1084,39 +1084,58 @@
   }
 
   async function loadRooms() {
-    try {
-      const res = await fetch(`${API_BASE}/rooms`);
-      if (res.ok) {
-        const fetched = await res.json();
-        if (Array.isArray(fetched) && fetched.length > 0) {
-          cachedRooms = fetched;
-          localStorage.setItem("hm_saved_rooms", JSON.stringify(cachedRooms));
+      const savedRooms = JSON.parse(localStorage.getItem("hm_saved_rooms")) || [];
+
+      try {
+        const res = await fetch(`${API_BASE}/rooms`);
+        if (res.ok) {
+          const serverRooms = await res.json();
+          if (Array.isArray(serverRooms) && serverRooms.length > 0) {
+            const roomMap = new Map();
+            serverRooms.forEach(r => roomMap.set(r.id, r));
+            savedRooms.forEach(r => roomMap.set(r.id, r));
+
+            cachedRooms = Array.from(roomMap.values());
+            localStorage.setItem("hm_saved_rooms", JSON.stringify(cachedRooms));
+          }
+        }
+      } catch (e) {
+        console.warn("Using offline/local rooms cache.");
+        if (savedRooms.length > 0) {
+          cachedRooms = savedRooms;
         }
       }
-    } catch (e) {
-      console.warn("Using persistent local rooms");
+      renderRoomCards();
+      renderAdminRooms();
+      refreshLiveQuote();
     }
-    renderRoomCards();
-    renderAdminRooms();
-    refreshLiveQuote();
-  }
 
   async function loadGallery() {
-    try {
-      const res = await fetch(`${API_BASE}/gallery`);
-      if (res.ok) {
-        const fetched = await res.json();
-        if (Array.isArray(fetched) && fetched.length > 0) {
-          cachedGallery = fetched;
-          localStorage.setItem("hm_saved_gallery", JSON.stringify(cachedGallery));
+      const savedLocal = JSON.parse(localStorage.getItem("hm_saved_gallery")) || [];
+
+      try {
+        const res = await fetch(`${API_BASE}/gallery`);
+        if (res.ok) {
+          const serverFetched = await res.json();
+          if (Array.isArray(serverFetched) && serverFetched.length > 0) {
+            // Merge to protect custom photos even if server has just restarted
+            const photoMap = new Map();
+            serverFetched.forEach(item => photoMap.set(item.id, item));
+            savedLocal.forEach(item => photoMap.set(item.id, item));
+
+            cachedGallery = Array.from(photoMap.values());
+            localStorage.setItem("hm_saved_gallery", JSON.stringify(cachedGallery));
+          }
+        }
+      } catch (e) {
+        console.warn("Using offline/local gallery cache.");
+        if (savedLocal.length > 0) {
+          cachedGallery = savedLocal;
         }
       }
-    } catch (e) {
-      console.warn("Using persistent local gallery photos");
+      renderGallery();
+      renderAdminGallery();
     }
-    renderGallery();
-    renderAdminGallery();
-  }
 
   async function loadBookings() {
     try {
