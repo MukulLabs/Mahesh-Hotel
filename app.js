@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  const API_BASE = "https://mahesh-hotel.onrender.com/api";
+  const API_BASE = "https://hotel-mahesh-v2-0.onrender.com";
   const PHONE = "918294817088";
   const FALLBACK_IMG = "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80";
   const ALBUM_ON = "album-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-800 text-white shadow transition cursor-pointer";
