@@ -8,33 +8,12 @@ from fastapi import FastAPI, HTTPException, status, Depends, Header, Form, Reque
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-import os
 from fastapi import HTTPException, Header
 
-# Set an admin secret key (or read from environment)
-ADMIN_SECRET_KEY = os.getenv("ADMIN_SECRET_KEY", "mahesh_hotel_reception_secret_2026")
-
-@app.get("/api/bookings")
-def get_bookings(x_admin_key: str = Header(None)):
-    # Block unauthorized visitors
-    if x_admin_key != ADMIN_SECRET_KEY:
-        raise HTTPException(status_code=401, detail="Unauthorized access to guest records")
-    
-    # Authorized: fetch from database
-    response = supabase_client.table("bookings").select("*").order("created_at", desc=True).execute()
-    return response.data
-
-# Brute-force protection libraries
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
-# Supabase Client Import
-try:
-    from supabase import create_client, Client
-except ImportError:
-    create_client = None
-    Client = Any
 
 # ==========================================
 # 1. INITIALIZATION & SECURITY SETUP
@@ -70,6 +49,53 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
+
+# Set an admin secret key (or read from environment)
+ADMIN_SECRET_KEY = os.getenv("ADMIN_SECRET_KEY", "mahesh_hotel_reception_secret_2026")
+
+@app.get("/api/bookings")
+def get_bookings(x_admin_key: str = Header(None)):
+    # Block unauthorized visitors
+    if x_admin_key != ADMIN_SECRET_KEY:
+        raise HTTPException(status_code=401, detail="Unauthorized access to guest records")
+    
+    # Authorized: fetch from database
+    response = supabase_client.table("bookings").select("*").order("created_at", desc=True).execute()
+    return response.data
+
+# Brute-force protection libraries
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+
+# Supabase Client Import
+try:
+    from supabase import create_client, Client
+except ImportError:
+    create_client = None
+    Client = Any
+
+# Set an admin secret key (or read from environment)
+ADMIN_SECRET_KEY = os.getenv("ADMIN_SECRET_KEY", "mahesh_hotel_reception_secret_2026")
+
+@app.get("/api/bookings")
+def get_bookings(x_admin_key: str = Header(None)):
+    # Block unauthorized visitors
+    if x_admin_key != ADMIN_SECRET_KEY:
+        raise HTTPException(status_code=401, detail="Unauthorized access to guest records")
+    
+    # Authorized: fetch from database
+    response = supabase_client.table("bookings").select("*").order("created_at", desc=True).execute()
+    return response.data
+
+
+# Supabase Client Import
+try:
+    from supabase import create_client, Client
+except ImportError:
+    create_client = None
+    Client = Any
+
 
 # ==========================================
 # 2. CREDENTIALS & SUPABASE INITIALIZATION
