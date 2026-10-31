@@ -374,20 +374,28 @@ We look forward to welcoming you!`;
   };
 
   // ---------------- staff login ----------------
-  const adminAuthModal = $("adminAuthModal");
+const adminAuthModal = $("adminAuthModal");
   const openAdminModal = () => {
-    $("modalAdminErr").textContent = "";
-    if (adminAuthModal.showModal) adminAuthModal.showModal(); else adminAuthModal.setAttribute("open", "");
+    if ($("modalAdminErr")) $("modalAdminErr").textContent = "";
+    if (adminAuthModal) {
+      if (adminAuthModal.showModal) adminAuthModal.showModal(); else adminAuthModal.setAttribute("open", "");
+    }
   };
-  ["btnOpenAdminModal", "btnOpenAdminModal2"].forEach((id) => { $(id).onclick = openAdminModal; });
-  $("adminModalClose").onclick = () => adminAuthModal.close();
+  ["btnOpenAdminModal", "btnOpenAdminModal2"].forEach((id) => { 
+    const el = $(id);
+    if (el) el.onclick = openAdminModal; 
+  });
+  if ($("adminModalClose")) $("adminModalClose").onclick = () => adminAuthModal && adminAuthModal.close();
 
-  $("adminLoginForm").onsubmit = async function (e) {
-    e.preventDefault();
-    const errBox = $("modalAdminErr"), btn = $("btnAdminSubmit");
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Authenticating...';
-    errBox.textContent = "";
+  if ($("adminLoginForm")) {
+    $("adminLoginForm").onsubmit = async function (e) {
+      e.preventDefault();
+      const errBox = $("modalAdminErr"), btn = $("btnAdminSubmit");
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Authenticating...';
+      }
+      if (errBox) errBox.textContent = "";
     try {
       const d = await api("/auth/login", {
         method: "POST", headers: { "Content-Type": "application/json" },
