@@ -4,9 +4,9 @@
 (function () {
   "use strict";
 
-  const API_BASE = "https://hotel-mahesh-v2-0.onrender.com/api";
+  const API_BASE = "https://mahesh-hotel.onrender.com/api";
   const PHONE = "918294817088";
-  const FALLBACK_IMG = "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80";
+  const FALLBACK_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%230f4a47'/%3E%3C/svg%3E";
   const ALBUM_ON = "album-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-800 text-white shadow transition cursor-pointer";
   const ALBUM_OFF = "album-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-100 transition cursor-pointer";
   const TAB_ON = "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-800 text-white shadow transition flex items-center gap-2 cursor-pointer";
@@ -86,6 +86,7 @@
     if ($("cfgEvFull")) $("cfgEvFull").value = c.event_full;
     if ($("evFullRateDisplay")) $("evFullRateDisplay").innerHTML = `₹${Number(c.event_full)} <span class="text-xs font-normal text-slate-300">/ guest</span>`;
     if ($("evSixRateDisplay")) $("evSixRateDisplay").textContent = `₹${Number(c.event_six)} / guest`;
+    applyDiscText();
     refreshLiveQuote();
   }
   async function loadRooms() {
@@ -95,7 +96,7 @@
       return;
     }
     cachedRooms = rooms;
-    renderRoomCards(); renderAdminRooms(); refreshLiveQuote();
+    renderRoomCards(); renderAdminRooms(); renderHourly(); applyDiscText(); refreshLiveQuote();
   }
   async function loadGallery() {
     const g = await withRetry(() => api("/gallery"));
@@ -107,6 +108,24 @@
       window.currentBookingsList = list;
       return list;
     } catch (e) { handleAdminError(e); return window.currentBookingsList || []; }
+  }
+
+  // prices/discounts shown on the page always come from the database
+  function applyDiscText() {
+    if (!cachedConfig) return;
+    const c = cachedConfig, d2 = Number(c.d2), d3 = Number(c.d3), d4 = Number(c.d4plus), mx = Math.max(d2, d3, d4);
+    const low = cachedRooms.length ? Math.min(...cachedRooms.map((r) => r.h1)) : null;
+    const T = {
+      full: `Tiered Rates: 2 Nights = ${d2}% OFF | 3 Nights = ${d3}% OFF | 4+ Nights = ${d4}% OFF`,
+      top: `Up to ${mx}% OFF multi-night stays!` + (low ? ` Hourly from ${money(low)}` : ""),
+      para: `Stay 2 nights for ${d2}% OFF, 3 nights for ${d3}% OFF, and 4+ nights for ${d4}% OFF.`,
+    };
+    document.querySelectorAll("[data-disc]").forEach((el) => { el.textContent = T[el.getAttribute("data-disc")] || ""; });
+  }
+  function renderHourly() {
+    const g = $("hourlyGrid"); if (!g) return;
+    const row = (l, v) => `<div class="flex justify-between"><dt>${l}</dt><dd class="font-bold">${money(v)}</dd></div>`;
+    g.innerHTML = cachedRooms.map((r) => `<div class="bg-slate-50 p-6 rounded-2xl border border-slate-200"><h4 class="font-bold text-slate-900 mb-3 text-center">${esc(r.name)}</h4><dl class="text-sm space-y-1 text-slate-700">${row("1 hour", r.h1)}${row("2 hours", r.h2)}${row("3 hours", r.h3)}${row("Whole day (24h)", r.hday)}</dl></div>`).join("");
   }
 
   // ---------------- rooms ----------------
@@ -121,7 +140,7 @@
       if (rg) rg.insertAdjacentHTML("beforeend", `
         <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-200 transition-all duration-300 flex flex-col group">
           <div class="relative h-64 overflow-hidden bg-slate-900">
-            <img src="${esc(safeImg)}" alt="${esc(r.name)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <img loading="lazy" src="${esc(safeImg)}" alt="${esc(r.name)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             <div class="absolute top-3 left-3 bg-emerald-950/90 backdrop-blur-md text-amber-300 text-xs font-bold px-3 py-1 rounded-lg border border-amber-400/30">${esc(r.sleeps)}</div>
             <div class="absolute bottom-3 right-3 bg-slate-950/80 backdrop-blur-md text-white text-[11px] px-2.5 py-1 rounded-md">Hourly: 1h: ₹${Number(r.h1)} | 2h: ₹${Number(r.h2)} | Day: ₹${Number(r.hday)}</div>
           </div>
@@ -164,20 +183,18 @@
     items.forEach((p) => {
       grid.insertAdjacentHTML("beforeend", `
         <div class="group relative h-64 rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300">
-          <img src="${esc(sanitizeImageUrl(p.url))}" alt="${esc(p.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <img loading="lazy" src="${esc(sanitizeImageUrl(p.url))}" alt="${esc(p.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
             <span class="text-white text-xs font-bold drop-shadow">${esc(p.title)}</span>
           </div>
         </div>`);
     });
   }
-  window.filterGallery = function (album) {
-    document.querySelectorAll(".album-btn").forEach((btn) => {
-      const on = (btn.getAttribute("onclick") || "").indexOf(`'${album}'`) !== -1;
-      btn.className = on ? ALBUM_ON : ALBUM_OFF;
-    });
-    renderGallery(album);
-  };
+  $("albumFilterBar").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-album]"); if (!b) return;
+    document.querySelectorAll(".album-btn").forEach((x) => (x.className = x === b ? ALBUM_ON : ALBUM_OFF));
+    renderGallery(b.getAttribute("data-album"));
+  });
 
   // ---------------- live quote (display only; server recomputes on booking) ----------------
   function refreshLiveQuote() {
@@ -196,7 +213,7 @@
         $("calcOldPrice").textContent = money(base);
         $("calcOldPrice").classList.remove("hidden");
       } else {
-        $("calcDiscountTag").textContent = "Standard rate (Stay 2+ nights to unlock 20% to 30% OFF!)";
+        $("calcDiscountTag").textContent = `Standard rate (stay 2+ nights for up to ${Math.max(Number(cachedConfig.d2), Number(cachedConfig.d3), Number(cachedConfig.d4plus))}% OFF)`;
         $("calcOldPrice").classList.add("hidden");
       }
       $("calcFinalPrice").textContent = money(currentCalculatedPayable);
@@ -259,6 +276,7 @@
     if (name.length < 2) { errBox.textContent = "Please enter guest full name."; return; }
     if (phone.length !== 10) { errBox.textContent = "Please enter a valid 10-digit mobile number."; return; }
     if (!/^[0-9A-Za-z]{4}$/.test(docNum)) { errBox.textContent = "Please enter the last 4 digits of your ID."; return; }
+    if (!$("custConsent").checked) { errBox.textContent = "Please accept the privacy notice and terms to continue."; return; }
 
     const cin = stayMode === "night" ? $("cin").value : $("hDate").value;
     const cout = stayMode === "night" ? $("cout").value : $("hDate").value;
@@ -295,18 +313,12 @@
       $("btnUpiIntentLink").href = upiUrl;
       const qrBox = $("qrcodeContainer");
       qrBox.innerHTML = "";
-      new QRCode(qrBox, { text: upiUrl, width: 190, height: 190, colorDark: "#072624", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.M });
+      const qr = qrcode(0, "M"); qr.addData(upiUrl); qr.make();
+      const qi = document.createElement("img"); qi.src = qr.createDataURL(5, 2); qi.alt = "UPI payment QR code"; qi.width = 190; qi.height = 190; qrBox.appendChild(qi);
 
-      pollSecondsLeft = 60;
-      $("waitingStatusLabel").innerHTML = `Waiting for payment confirmation... (<span id="pollCountdown">${pollSecondsLeft}</span>s)`;
+      $("waitingStatusLabel").textContent = "Awaiting front-desk verification";
       clearPollingTimers();
-      const finish = () => { clearPollingTimers(); closeGuestModal(); completeBookingNotification(record, name, phone, fullDoc, cin, cout, hours, "UPI Sent (Pending Desk Verification)"); };
-      pollCountdownTimer = setInterval(() => {
-        pollSecondsLeft--;
-        const cd = $("pollCountdown"); if (cd) cd.textContent = pollSecondsLeft;
-        if (pollSecondsLeft <= 0) finish();
-      }, 1000);
-      $("btnManualConfirmPaid").onclick = finish;
+      $("btnManualConfirmPaid").onclick = () => { closeGuestModal(); completeBookingNotification(record, name, phone, fullDoc, cin, cout, hours, "UPI Sent (Pending Desk Verification)"); };
     } catch (err) {
       errBox.textContent = err.status ? err.message : "Server is waking up (about 45 seconds). Please try again shortly or call +91 82948 17088.";
     } finally {
@@ -363,10 +375,11 @@ We look forward to welcoming you!`;
 
   // ---------------- staff login ----------------
   const adminAuthModal = $("adminAuthModal");
-  $("btnOpenAdminModal").onclick = () => {
+  const openAdminModal = () => {
     $("modalAdminErr").textContent = "";
     if (adminAuthModal.showModal) adminAuthModal.showModal(); else adminAuthModal.setAttribute("open", "");
   };
+  ["btnOpenAdminModal", "btnOpenAdminModal2"].forEach((id) => { $(id).onclick = openAdminModal; });
   $("adminModalClose").onclick = () => adminAuthModal.close();
 
   $("adminLoginForm").onsubmit = async function (e) {
@@ -421,7 +434,7 @@ We look forward to welcoming you!`;
       const h = Math.floor(diff / 3600000), m = Math.floor((diff % 3600000) / 60000), s = Math.floor((diff % 60000) / 1000);
       return `<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 font-bold text-xs font-mono">${h}h ${m}m ${s}s left</span>`;
     }
-    const diff = new Date(`${b.end_date}T11:00:00+05:30`).getTime() - now;
+    const diff = new Date(`${b.end_date}T12:00:00+05:30`).getTime() - now;
     if (diff <= 0) return `<span class="px-2 py-0.5 rounded bg-rose-100 text-rose-800 font-bold text-[11px]">Due for Check-out</span>`;
     const d = Math.floor(diff / 86400000), h = Math.floor((diff % 86400000) / 3600000), m = Math.floor((diff % 3600000) / 60000);
     if (d > 0) return `<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 font-bold text-xs font-mono">${d}d ${h}h remaining</span>`;
@@ -495,7 +508,8 @@ We look forward to welcoming you!`;
     });
     listC.innerHTML = h + "</tbody></table>";
   }
-  window.renderAdmin = renderAdmin;   // used by the "Refresh List" button in the markup
+  window.renderAdmin = renderAdmin;
+  $("btnRefreshAdmin").onclick = () => renderAdmin();   // used by the "Refresh List" button in the markup
 
   const findBooking = (id) => (window.currentBookingsList || []).find((x) => String(x.id) === String(id));
   async function patchStatus(id, body) {
@@ -521,11 +535,17 @@ We look forward to welcoming you!`;
     return t;
   }
 
+  function askPayMethod() {
+    const v = (prompt("How was the payment received? Type Cash, UPI or Card:") || "").trim().toLowerCase();
+    const m = { cash: "Cash", upi: "UPI", card: "Card" }[v];
+    if (!m) alert("Please type Cash, UPI or Card.");
+    return m || null;
+  }
   async function actVerify(id) {
     const b = findBooking(id); if (!b) return;
     const body = { new_status: "Confirmed" };
     if (b.payment_mode === "UPI") { const u = promptUtr(); if (!u) return; body.utr = u; }
-    else if (!confirm("Confirm that payment was received at the counter?")) return;
+    else { if (!confirm("Confirm that payment was received at the counter?")) return; const pm = askPayMethod(); if (!pm) return; body.pay_method = pm; }
     if (!(await patchStatus(id, body))) return;
     if (confirm("Booking approved! Send WhatsApp confirmation to guest now?")) window.sendWhatsAppConfirmationById(id);
     renderAdmin();
@@ -536,6 +556,7 @@ We look forward to welcoming you!`;
     if (b.status === "Pending" && b.payment_mode === "UPI" && !b.utr) { const u = promptUtr(); if (!u) return; body.utr = u; }
     const room = promptRoom(); if (!room) return;
     body.room_number = room;
+    if (b.status === "Pending" && b.payment_mode !== "UPI") { const pm = askPayMethod(); if (!pm) return; body.pay_method = pm; }
     if (!(await patchStatus(id, body))) return;
     if (confirm(`Guest checked into Room ${room}! Send WhatsApp confirmation?`)) window.sendWhatsAppConfirmationById(id);
     renderAdmin();
@@ -565,10 +586,14 @@ We look forward to welcoming you!`;
       event_full: num($("cfgEvFull").value, 1000),
     };
     if (cachedConfig && cachedConfig.event_six != null) payload.event_six = Number(cachedConfig.event_six);
+    if (cachedConfig && payload.upi_id !== cachedConfig.upi_id) {
+      payload.current_password = $("cfgPass").value;
+      if (!payload.current_password) return alert("Enter your admin password to change the UPI ID.");
+    }
     if (!confirm(`Save these settings?\n\nCustomers will pay to: ${payload.upi_id}\n\nCheck this UPI ID carefully.`)) return;
     try {
       const d = await api("/config", { method: "POST", headers: getAuthHeaders({ "Content-Type": "application/json" }), body: JSON.stringify(payload) });
-      cachedConfig = d.config;
+      cachedConfig = d.config; $("cfgPass").value = "";
       $("cfgSaveNotice").textContent = "Rates & UPI Destination saved in database!";
       setTimeout(() => ($("cfgSaveNotice").textContent = ""), 3000);
       loadConfig();
@@ -634,17 +659,18 @@ We look forward to welcoming you!`;
     const idNum = $("nId").value.trim();
     if (name.length < 2) { err.textContent = "Please enter guest name."; return; }
     if (phone.length !== 10) { err.textContent = "Please enter 10-digit mobile number."; return; }
-    if (idNum && !/^[0-9A-Za-z]{4}$/.test(idNum)) { err.textContent = "ID must be exactly the last 4 digits."; return; }
+    if (!/^[0-9A-Za-z]{4}$/.test(idNum)) { err.textContent = "ID proof is required: enter the last 4 characters."; return; }
     const isHour = $("nType").value === "hour";
     const cin = isHour ? $("nDate").value : $("nIn").value;
     const cout = isHour ? $("nDate").value : $("nOut").value;
     if (!cin || !cout) { err.textContent = "Please select dates."; return; }
-    const room = promptRoom(); if (!room) return;
+    const room = $("nRoomNo").value.trim();
+    if (!/^[A-Za-z0-9-]{1,10}$/.test(room)) { err.textContent = "Enter the room number."; return; }
     const fd = new FormData();
     fd.append("name", name); fd.append("phone", phone); fd.append("room_id", $("nRoom").value);
     fd.append("booking_type", $("nType").value); fd.append("start_date", cin); fd.append("end_date", cout);
     fd.append("hours", String(isHour ? Number($("nHrs").value) : 0)); fd.append("guests", "2");
-    fd.append("id_proof", idNum ? `Front Desk: ${idNum}` : "Counter Walk-in"); fd.append("room_number", room);
+    fd.append("id_proof", `${$("nDoc").value}: ${idNum}`); fd.append("room_number", room); fd.append("pay_method", $("nPay").value);
     try {
       await api("/admin/bookings", { method: "POST", headers: getAuthHeaders(), body: fd });
       alert("Counter guest checked in successfully!");
@@ -652,7 +678,7 @@ We look forward to welcoming you!`;
       renderAdmin();
     } catch (e) { err.textContent = e.message; if (e.status === 401) handleAdminError(e); }
   };
-  $("adminOut").onclick = function () { sessionStorage.clear(); window.location.hash = ""; route(); };
+  $("adminOut").onclick = async function () { try { await api("/auth/logout", { method: "POST", headers: getAuthHeaders() }); } catch (_) { /* token expires anyway */ } sessionStorage.clear(); window.location.hash = ""; route(); };
 
   // ---------------- booking widget tabs + inputs ----------------
   $("tabNightly").onclick = function () {

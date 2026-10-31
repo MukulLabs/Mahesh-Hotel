@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /policies.html#admin
+Sitemap: https://hotelmahesh.co/sitemap.xml
